@@ -26,7 +26,7 @@ class EstadosTable extends Table
         parent::initialize($config);
 
         $this->table('estados');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->hasMany('Cidades', [

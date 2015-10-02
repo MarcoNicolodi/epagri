@@ -26,7 +26,7 @@ class CoberturasTable extends Table
         parent::initialize($config);
 
         $this->table('coberturas');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->hasMany('Tanques', [

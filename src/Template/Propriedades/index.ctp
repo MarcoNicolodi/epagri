@@ -1,6 +1,12 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="page-header">Propriedades</h2>
+    </div>
+</div>
+
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3><?= __('Propriedades') ?></h3>
+        <h3 class="panel-title">Gerenciar Propriedades</h3>
     </div>
     <div class="panel-body">
     <table class="table table-striped">
@@ -35,9 +41,9 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('Próximo')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('Anterior') . ' >') ?>
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>

@@ -26,7 +26,7 @@ class ProdutosTable extends Table
         parent::initialize($config);
 
         $this->table('produtos');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->hasMany('Estoques', [

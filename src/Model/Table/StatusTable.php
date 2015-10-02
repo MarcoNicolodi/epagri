@@ -26,7 +26,7 @@ class StatusTable extends Table
         parent::initialize($config);
 
         $this->table('status');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->hasMany('Ciclos', [

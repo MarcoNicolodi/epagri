@@ -28,7 +28,7 @@ class TanquesTable extends Table
         parent::initialize($config);
 
         $this->table('tanques');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->belongsTo('Coberturas', [

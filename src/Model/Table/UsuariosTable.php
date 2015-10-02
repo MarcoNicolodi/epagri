@@ -29,7 +29,7 @@ class UsuariosTable extends Table
         parent::initialize($config);
 
         $this->table('usuarios');
-        $this->displayField('id_usuario');
+        $this->displayField('username');
         $this->primaryKey('id_usuario');
 
         $this->belongsTo('Cidades', [

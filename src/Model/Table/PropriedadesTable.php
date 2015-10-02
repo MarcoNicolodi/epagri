@@ -28,7 +28,7 @@ class PropriedadesTable extends Table
         parent::initialize($config);
 
         $this->table('propriedades');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->belongsTo('Usuarios', [

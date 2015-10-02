@@ -26,7 +26,7 @@ class EspeciesTable extends Table
         parent::initialize($config);
 
         $this->table('especies');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->belongsToMany('CategoriasCultivos', [

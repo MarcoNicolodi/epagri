@@ -27,7 +27,7 @@ class ComentariosTable extends Table
         parent::initialize($config);
 
         $this->table('comentarios');
-        $this->displayField('id');
+        $this->displayField('conteudo');
         $this->primaryKey('id');
 
         $this->belongsTo('Usuarios', [

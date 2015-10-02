@@ -26,7 +26,7 @@ class CategoriasCultivosTable extends Table
         parent::initialize($config);
 
         $this->table('categorias_cultivos');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
 
         $this->belongsToMany('Especies', [
