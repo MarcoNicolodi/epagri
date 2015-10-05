@@ -26,7 +26,7 @@
             <div class="form-group">
                 <?= $this->Form->input('cidade_id',['class' => 'form-control']); ?>
             </div>
-            <?= $this->Form->button('Submit', ['class' => 'btn btn-lg btn-primary btn-default']) ?>
+            <?= $this->Form->button('Editar', ['class' => 'btn btn-lg btn-primary btn-default']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

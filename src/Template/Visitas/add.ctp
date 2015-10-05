@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <?= $this->Form->input('data', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
                     </div>
-                <?= $this->Form->button('Enviar', ['class' => 'btn btn-lg btn-primary btn-default']) ?>
+                <?= $this->Form->button('Cadastrar', ['class' => 'btn btn-lg btn-primary btn-default']) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>

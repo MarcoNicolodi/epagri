@@ -30,12 +30,18 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     <?= $this->Html->css('sb-admin-2.css') ?>
     <?= $this->Html->css('jquery-ui.min.css') ?>
     <?= $this->Html->css('jquery-ui.structure.min.css') ?>
+    <?= $this->Html->css('jquery-ui.theme.min.css') ?>
+
     <?= $this->Html->css('font-awesome/css/font-awesome.min.css') ?>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <?= $this->Html->css('select2-bootstrap.css') ?>
     <?= $this->Html->css('custom.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
+
 </head>
 <body>
     <div id="wrapper">
@@ -259,7 +265,9 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     <?= $this->Html->script('sb-admin-2.js') ?>
     <?= $this->Html->script('metisMenu.js') ?>
     <?= $this->Html->script('custom.js') ?>
+    <!-- select2 plugin CDN -->
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
 </body>
 </html>
