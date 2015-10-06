@@ -1,10 +1,11 @@
+
 <div class="row">
     <div class="col-md-12">
         <h3 class="page-header">Propriedades</h2>
     </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-success">
     <div class="panel-heading">
         <h3 class="panel-title">Gerenciar Propriedades</h3>
     </div>

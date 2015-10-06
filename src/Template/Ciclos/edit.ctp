@@ -1,15 +1,34 @@
-<div class="ciclos form large-9 medium-8 columns content">
-    <?= $this->Form->create($ciclo) ?>
-    <fieldset>
-        <legend><?= __('Edit Ciclo') ?></legend>
-        <?php
-            echo $this->Form->input('tanque_id', ['options' => $tanques]);
-            echo $this->Form->input('data_inicio');
-            echo $this->Form->input('povoamento_inicio');
-            echo $this->Form->input('status_id', ['options' => $status]);
-            echo $this->Form->input('data_fim', ['empty' => true, 'default' => '']);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header"> Ciclos </h2>
+    </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"> Editar Ciclo </h2>
+            </div>
+            <div class="panel-body">
+                <?= $this->Form->create($ciclo) ?>
+                <div class="form-group">
+                    <?= $this->Form->input('tanque_id', ['options' => $tanques,'class' => 'form-control']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->Form->input('data_inicio', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->Form->input('povoamento_inicio', ['class' => 'form-control']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->Form->input('status_id', ['options' => $status, 'class' => 'form-control']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->Form->input('data_fim', ['type' => 'text', 'empty' => true, 'default' => '', 'class' => 'form-control datepicker']); ?>
+                </div>
+                <?= $this->Form->button('Editar', ['class' => 'btn btn-lg btn-primary btn-default ']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div<
