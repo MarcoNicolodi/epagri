@@ -28,6 +28,9 @@
                     <div class="col-md-4">
                         <?= $this->Html->link('Novo Tanque', ['controller' => 'Tanques', 'action'=> 'add'], ['class'=> 'btn btn-primary btn-default btn-block']) ?>
                     </div>
+                    <div class="col-md-4">
+                        <?= $this->Html->link('Editar Propriedade', ['controller' => 'Propriedades', 'action'=> 'add'], ['class'=> 'btn btn-primary btn-default btn-block']) ?>
+                    </div>
                 </div>
             </div>
         </div>
