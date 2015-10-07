@@ -1,12 +1,25 @@
-<div class="coberturas form large-9 medium-8 columns content">
-    <?= $this->Form->create($cobertura) ?>
-    <fieldset>
-        <legend><?= __('Add Cobertura') ?></legend>
-        <?php
-            echo $this->Form->input('nome');
-            echo $this->Form->input('descricao');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="page-header"> Coberturas </h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title"> Nova Cobertura </h3>
+            </div>
+            <div class="panel-body">
+                <?= $this->Form->create($cobertura) ?>
+                <div class="form-group">
+                    <?= $this->Form->input('nome', ['class' => 'form-control']); ?>
+                </div>
+                <div class="form-group">
+                    <?= $this->Form->input('descricao', ['class' => 'form-control', 'label'=>'Descrição']); ?>
+                </div>
+                <?= $this->Form->button('Cadastrar', ['class' => 'btn btn-lg btn-primary btn-default']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
 </div>

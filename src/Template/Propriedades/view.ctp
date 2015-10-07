@@ -34,8 +34,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">Tanques</h3>
@@ -72,8 +70,6 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-md-6">
         <div class="panel panel-success">
             <div class="panel-heading">
@@ -107,7 +103,6 @@
                         <td><?= $this->Number->format($propriedade->tamanho) ?></td>
                     </tr>
                 </table>
-
             </div>
         </div>
     </div>
