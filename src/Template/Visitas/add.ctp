@@ -10,19 +10,17 @@
                 <div class="form-group">
                     <label> Peso </label>
                     <input class="form-control" name="peso_peixes[]">
-                    <a class="btn btn-success" onClick=""> <i class="fa fa-plus"></i></a>
-                </div>
-                <div class="form-group">
-                    <label> Peso </label>
-                    <input class="form-control" name="peso_peixes[]">
-                    <a class="btn btn-success" onClick="deleteNode1()"> <i class="fa fa-plus"></i></a>
+                    <a class="btn btn-danger" > <i class="fa fa-minus"></i></a>
                 </div>
             </div>
             <div id="teste">
             </div>
             <div class="modal-footer">
+                <div class="pull-left">
+                    <a class="btn btn-success" onClick="duplicateNode()"> <i class="fa fa-plus"></i></a>
+                </div>
                 <button type="button" class="btn btn-warning" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary btn-default">Calcular</button>
+                <button type="button" class="btn btn-primary btn-default" onClick="calculateFishWeight()">Calcular</button>
             </div>
         </div>
     </div>
@@ -78,7 +76,7 @@
                     </div>
 
                     <div class="form-group">
-                        <?= $this->Form->input('peso_peixes', ['class' => 'form-control', 'label' => 'Peso Médio dos Peixes']); ?>
+                        <?= $this->Form->input('peso', ['class' => 'form-control', 'label' => 'Peso Médio dos Peixes']); ?>
                     </div>
                     <div class="form-group">
                         <?= $this->Form->input('data', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
@@ -93,9 +91,30 @@
 <?= $this->fetch('script'); ?>
 <script type="text/javascript">
 
-        function deleteNode1(){
-            $(".modal-body:last").remove();
+        // function deleteNode(){
+        //     $(event.target).parent().remove();
+        // }
+
+        function duplicateNode(){
+            $(".modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"peso_peixes[]\"><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
         }
+
+        function deleteNode(elt){
+            $(elt).closest("div").remove();
+        }
+
+        function calculateFishWeight(){
+            inputs = document.getElementsByName('peso_peixes[]');
+            count = 0;
+            soma = 0;
+            for(i=0; i<=inputs.length-1; i++){
+                soma += parseFloat(inputs[i].value);
+                count++;
+            }
+            media = soma/count;
+            console.log(media);
+        }
+
 
 </script>
 <?php $this->end(); ?>
