@@ -28,7 +28,7 @@ class VisitasTable extends Table
 
         $this->table('visitas');
         $this->displayField('id');
-        $this->primaryKey(['id', 'ciclo_id']);
+        $this->primaryKey(['id']);
 
         $this->belongsTo('Ciclos', [
             'foreignKey' => 'ciclo_id',

@@ -85,7 +85,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title"> Nova Visita </h3>
-            </div>comprimento
+            </div>
             <div class="panel-body">
                 <?= $this->Form->create($visita) ?>
                     <div class="form-group">
