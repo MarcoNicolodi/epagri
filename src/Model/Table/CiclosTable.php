@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
 
 /**
  * Ciclos Model
@@ -88,5 +89,11 @@ class CiclosTable extends Table
         $rules->add($rules->existsIn(['tanque_id'], 'Tanques'));
         $rules->add($rules->existsIn(['status_id'], 'Status'));
         return $rules;
+    }
+
+    public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
+    {
+        $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime($data['data_inicio'])) : '';
+        $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime($data['data_fim'])) : '';
     }
 }

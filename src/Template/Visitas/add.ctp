@@ -63,7 +63,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-success">
+        <div class="panel panel-green">
             <div class="panel-heading">
                 <h3 class="panel-title"> Ações </h3>
             </div>
@@ -82,7 +82,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-success">
+        <div class="panel panel-green">
             <div class="panel-heading">
                 <h3 class="panel-title"> Nova Visita </h3>
             </div>

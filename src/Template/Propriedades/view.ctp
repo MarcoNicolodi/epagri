@@ -5,7 +5,7 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <div class="panel panel-success">
+        <div class="panel panel-green">
             <div class="panel-heading">
                 <h3 class="panel-title">Ações</h3>
             </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-success">
+        <div class="panel panel-green">
             <div class="panel-heading">
                 <h3 class="panel-title">Tanques</h3>
             </div>
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-success">
+        <div class="panel panel-green">
             <div class="panel-heading">
                 <h3 class="panel-title">Informações</h3>
             </div>

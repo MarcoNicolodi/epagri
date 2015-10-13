@@ -1,4 +1,4 @@
 $("document").ready(function(){
-    $(".datepicker").datepicker();
-    $(".select2").select2();    
+    $(".datepicker").datepicker({"dateFormat": 'dd/mm/yy'});
+    $(".select2").select2();
 });
