@@ -43,5 +43,7 @@ class NotificadorComponent extends Component
             $message['alerta_alimentacao'] = 'danger';
         }
 
+        return $message;
+
     }
 }

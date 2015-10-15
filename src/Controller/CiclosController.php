@@ -52,6 +52,7 @@ class CiclosController extends AppController
         if ($this->request->is('post')) {
             $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);
             if ($this->Ciclos->save($ciclo)) {
+                dump($ciclo->toArray());
                 $this->Flash->success(__('The ciclo has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {

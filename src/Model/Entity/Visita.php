@@ -32,7 +32,6 @@ class Visita extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'id' => false,
-        'ciclo_id' => false,
+        'id' => false        
     ];
 }

@@ -38,6 +38,11 @@ class VisitasTable extends Table
             'foreignKey' => 'params_ideais_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->hasMany('Notificacoes', [
+            'foreignKey' => 'visita_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -51,7 +56,7 @@ class VisitasTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-
+        
         $validator
             ->add('oxigenio_agua', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('oxigenio_agua');

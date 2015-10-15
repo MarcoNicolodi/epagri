@@ -16,10 +16,16 @@ class VisitasController extends AppController
      *
      * @return void
      */
+    public function initialize()
+    {
+        parent::initialize();
+        $this->LoadComponent('Notificador');
+    }
+
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Ciclos', 'ParametrosIdeais']
+            'contain' => ['Ciclos']
         ];
         $this->set('visitas', $this->paginate($this->Visitas));
         $this->set('_serialize', ['visitas']);
@@ -51,6 +57,14 @@ class VisitasController extends AppController
         $visita = $this->Visitas->newEntity();
         if ($this->request->is('post')) {
             $visita = $this->Visitas->patchEntity($visita, $this->request->data);
+            // $notificacao = $this->Visitas->Notificacoes->newEntity();
+            // $notificacao = $this->Visitas->Notificacoes->patchEntity($notificacao,$this->Notificador->notificar($this->request->data));
+            // if($this->Visitas->Notificacoes->save($notificacao)){
+            //     $this->Flash->success(__('The notificacao has been saved.'));
+            //     return $this->redirect(['action' => 'index']);
+            // } else {
+            //     $this->Flash->error(__('The notificacao could not be saved. Please, try again.'));
+            // }
             if ($this->Visitas->save($visita)) {
                 $this->Flash->success(__('The visita has been saved.'));
                 return $this->redirect(['action' => 'index']);

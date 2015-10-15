@@ -24,7 +24,7 @@
                     <?= $this->Form->input('status_id', ['options' => $status, 'class' => 'form-control']); ?>
                 </div>
                 <div class="form-group">
-                    <?= $this->Form->input('data_fim', ['type' => 'text', 'empty' => true, 'default' => '', 'class' => 'form-control datepicker']); ?>
+                    <?= $this->Form->input('data_fim', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
                 </div>
                 <?= $this->Form->button('Cadastrar', ['class' => 'btn btn-lg btn-primary btn-default ']) ?>
                 <?= $this->Form->end() ?>

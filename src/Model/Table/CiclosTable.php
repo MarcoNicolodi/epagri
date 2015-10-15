@@ -32,6 +32,7 @@ class CiclosTable extends Table
         $this->table('ciclos');
         $this->displayField('id');
         $this->primaryKey('id');
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Tanques', [
             'foreignKey' => 'tanque_id',
@@ -74,6 +75,10 @@ class CiclosTable extends Table
             ->add('data_fim', 'valid', ['rule' => 'date'])
             ->allowEmpty('data_fim');
 
+        $validator
+            ->requirePresence('status_id', 'create')
+            ->notEmpty('status_id');
+
         return $validator;
     }
 
@@ -93,7 +98,14 @@ class CiclosTable extends Table
 
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
-        $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime($data['data_inicio'])) : '';
-        $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime($data['data_fim'])) : '';
+        if(array_key_exists('data_inicio', $data))
+            $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_inicio']))))) : '';
+
+        if(array_key_exists('data_fim', $data))
+            $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_fim']))))) : '';
+
+        dump($data['data_inicio']);
+
+
     }
 }

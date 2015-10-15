@@ -89,7 +89,7 @@
             <div class="panel-body">
                 <?= $this->Form->create($visita) ?>
                     <div class="form-group">
-                        <?=  $this->Form->input('ciclo', ['class' => 'form-control']); ?>
+                        <?=  $this->Form->input('ciclo_id', ['options' => $ciclos, 'class' => 'form-control']); ?>
                     </div>
                     <div class="form-group">
                         <?=  $this->Form->input('oxigenio_agua', ['class' => 'form-control', 'label' => 'Nível de Oxigenação da Água']); ?>
