@@ -69,11 +69,11 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-3">
-                        <button class="btn btn-primary btn-default btn-block" data-toggle="modal" data-target="#calc-peso-modal"> Calcular média de peso dos peixes </button>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#calc-peso-modal"> Calcular média de peso dos peixes </button>
                     </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-primary btn-default btn-block" data-toggle="modal" data-target="#calc-comprimento-modal"> Calcular média de altura dos peixes </button>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#calc-comprimento-modal"> Calcular média de altura dos peixes </button>
                     </div>
                 </div>
             </div>

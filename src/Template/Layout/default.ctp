@@ -26,7 +26,7 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('bootstrap.min.css') ?>
+    <?= $this->Html->css('bootstrap.css') ?>
     <?= $this->Html->css('sb-admin-2.css') ?>
     <?= $this->Html->css('jquery-ui.min.css') ?>
     <?= $this->Html->css('jquery-ui.structure.min.css') ?>

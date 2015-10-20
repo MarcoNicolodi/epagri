@@ -41,7 +41,7 @@ class VisitasController extends AppController
     public function view($id = null)
     {
         $visita = $this->Visitas->get($id, [
-            'contain' => ['Ciclos', 'ParametrosIdeais']
+            'contain' => ['Ciclos' =>['Tanques' =>['Propriedades']], 'Notificacoes']
         ]);
         $this->set('visita', $visita);
         $this->set('_serialize', ['visita']);
@@ -57,19 +57,24 @@ class VisitasController extends AppController
         $visita = $this->Visitas->newEntity();
         if ($this->request->is('post')) {
             $visita = $this->Visitas->patchEntity($visita, $this->request->data);
-            // $notificacao = $this->Visitas->Notificacoes->newEntity();
-            // $notificacao = $this->Visitas->Notificacoes->patchEntity($notificacao,$this->Notificador->notificar($this->request->data));
-            // if($this->Visitas->Notificacoes->save($notificacao)){
-            //     $this->Flash->success(__('The notificacao has been saved.'));
-            //     return $this->redirect(['action' => 'index']);
-            // } else {
-            //     $this->Flash->error(__('The notificacao could not be saved. Please, try again.'));
-            // }
-            if ($this->Visitas->save($visita)) {
-                $this->Flash->success(__('The visita has been saved.'));
-                return $this->redirect(['action' => 'index']);
+
+            if ($this->Visitas->save($visita)){
+                $notificacao = $this->Visitas->Notificacoes->newEntity();
+                foreach($this->Notificador->notificar($this->request->data) as $k=>$v){
+                    $notificacao_data[$k] = $v;
+                }
+                $notificacao_data['visita_id'] = $visita->id;
+                $notificacao = $this->Visitas->Notificacoes->patchEntity($notificacao,$notificacao_data);
+
+                if($this->Visitas->Notificacoes->save($notificacao)){
+                    $this->Flash->success(__('The notificacao has been saved.'));
+                } else {
+                    $this->Flash->error(__('The notificacao could not be saved. Please, try again.'));
+                }
+                $this->Flash->success(__('Os dados da visita foram salvos.'));
+                return $this->redirect(['action' => 'view', $visita->id]);
             } else {
-                $this->Flash->error(__('The visita could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um erro ao tentar salvar os dados da visita. Por favor, tente novamente.'));
             }
         }
         $ciclos = $this->Visitas->Ciclos->find('list', ['limit' => 200]);
