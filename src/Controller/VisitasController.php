@@ -67,9 +67,9 @@ class VisitasController extends AppController
                 $notificacao = $this->Visitas->Notificacoes->patchEntity($notificacao,$notificacao_data);
 
                 if($this->Visitas->Notificacoes->save($notificacao)){
-                    $this->Flash->success(__('The notificacao has been saved.'));
+                    $this->Flash->success(__('As notificações foram geradas com sucesso.'));
                 } else {
-                    $this->Flash->error(__('The notificacao could not be saved. Please, try again.'));
+                    $this->Flash->error(__('Ocorreu um erro ao tentar gerar as notificações dessa visita.'));
                 }
                 $this->Flash->success(__('Os dados da visita foram salvos.'));
                 return $this->redirect(['action' => 'view', $visita->id]);

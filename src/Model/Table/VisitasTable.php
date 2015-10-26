@@ -39,7 +39,7 @@ class VisitasTable extends Table
             'joinType' => 'INNER'
         ]);
 
-        $this->hasMany('Notificacoes', [
+        $this->hasOne('Notificacoes', [
             'foreignKey' => 'visita_id',
             'joinType' => 'INNER'
         ]);
@@ -56,7 +56,7 @@ class VisitasTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-        
+
         $validator
             ->add('oxigenio_agua', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('oxigenio_agua');

@@ -8,8 +8,8 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label> Peso </label>
-                    <input class="form-control" name="calc_peso[]">
+                    <label> Peso 1</label>
+                    <input class="form-control" name="calc_peso[]" onkeydown="duplicatePesoOnTab(event)">
                     <a class="btn btn-danger" > <i class="fa fa-minus"></i></a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label> Comprimento </label>
+                    <label> Comprimento 1</label>
                     <input class="form-control" name="calc_comprimento[]">
                     <a class="btn btn-danger" > <i class="fa fa-minus"></i></a>
                 </div>
@@ -122,11 +122,11 @@
 <script type="text/javascript">
 
         function duplicatePesoInput(){
-            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_peso[]\"><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
         }
 
         function duplicateComprimentoInput(){
-            $("#calc-comprimento-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_comprimento[]\"><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+            $("#calc-comprimento-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_comprimento[]\" onkeydown=\"dublicateComprimentoOnTab(e)\"><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
         }
 
         function deleteNode(elt){
@@ -171,6 +171,12 @@
             console.log(media);
         }
 
+        function duplicatePesoOnTab(e){
+            var code = e.keyCode || e.which;
+            if(code === 9){
+                duplicatePesoInput();
+            }
+        }
 
 </script>
 <?php $this->end(); ?>
