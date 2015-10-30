@@ -20,3 +20,25 @@ a:hover {
 .navbar-static-top{
     border-bottom: 2px solid #e74c3c;
 }
+
+.error-message {
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #F2DEDE;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.success-message {
+    color: #3C763D;
+    background-color: #DFF0D8;
+    border-color: #DFF0D8;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+#login-wrapper {
+    background-color: white;
+}

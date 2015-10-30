@@ -40,8 +40,6 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
 
-
-
 </head>
 <body>
     <div id="wrapper">
@@ -93,10 +91,10 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Usuários<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
-                                        <a href="flot.html">Gerenciar</a>
+                                        <?= $this->Html->link('Gerenciar', ["controller" => "Usuarios","action" => "index"]); ?>
                                     </li>
                                     <li>
-                                        <a href="morris.html">Cadastrar</a>
+                                        <?= $this->Html->link('Cadastrar', ["controller" => "Usuarios","action" => "add"]); ?>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -105,10 +103,10 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <a href="#"><i class="fa fa-pagelines  fa-fw"></i> Propriedades<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
-                                        <a href="<?= $this->Url->build(['controller'=>'Propriedades', 'action'=>'index'])?>">Gerenciar</a>
+                                        <?= $this->Html->link('Gerenciar', ["controller" => "Prorpiedades","action" => "index"]); ?>
                                     </li>
                                     <li>
-                                        <a href="<?= $this->Url->build(['controller'=>'Propriedades', 'action'=>'add'])?>">Cadastrar</a>
+                                        <?= $this->Html->link('Cadastrar', ["controller" => "Propriedades","action" => "add"]); ?>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -117,20 +115,17 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <a href="#"><i class="fa fa-sitemap fa-fw"></i> Ciclos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
-                                        <a href="#">Second Level Item</a>
+                                        <?= $this->Html->link('Gerenciar', ["controller" => "Ciclos","action" => "index"]); ?>
                                     </li>
                                     <li>
-                                        <a href="#">Second Level Item</a>
+                                        <?= $this->Html->link('Cadastrar', ["controller" => "Ciclos","action" => "add"]); ?>
                                     </li>
-                                                                </ul>
+                                </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Configurações<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
-                                    <li>
-                                        <a href="#">Parâmetros</a>
-                                    </li>
                                     <li>
                                         <a href="#">Categorias de Cultivos</a>
                                     </li>

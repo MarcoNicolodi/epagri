@@ -15,6 +15,9 @@
                     <?= $this->Form->input('tanque_id', ['options' => $tanques,'class' => 'form-control']); ?>
                 </div>
                 <div class="form-group">
+                    <?= $this->Form->input('nome', ['class' => 'form-control']); ?>
+                </div>
+                <div class="form-group">
                     <?= $this->Form->input('data_inicio', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
                 </div>
                 <div class="form-group">

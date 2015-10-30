@@ -9,8 +9,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label> Peso 1</label>
-                    <input class="form-control" name="calc_peso[]" onkeydown="duplicatePesoOnTab(event)">
-                    <a class="btn btn-danger" > <i class="fa fa-minus"></i></a>
+                    <input class="form-control" name="calc_peso[]" onkeydown="duplicatePesoOnTab(event,this)">
                 </div>
             </div>
             <div id="teste">
@@ -121,8 +120,10 @@
 <?= $this->fetch('script'); ?>
 <script type="text/javascript">
 
+        var pesoCount = 1;
         function duplicatePesoInput(){
-            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+            pesoCount++;
+            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso ' + pesoCount + '</label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
         }
 
         function duplicateComprimentoInput(){
@@ -130,6 +131,13 @@
         }
 
         function deleteNode(elt){
+            // console.log($(elt.parentNode.firstChild.innerHTML.charAt(elt.parentNode.firstChild.innerHTML.length - 1)));
+            // atual = 3, total = 5, entao 4 deve virar 3, 5 virar 4, ou seja, pega os proximos siblings
+            // if(elt.parentNode.nextSibling);
+            // console.log($(elt).parent().children().first());
+            // start = parseInt(elt.parentNode.firstChild.innerHTML.charAt(elt.parentNode.firstChild.innerHTML.length - 1));
+            // console.log($(elt.previousNode));
+
             $(elt).closest("div").remove();
         }
 
@@ -171,7 +179,8 @@
             console.log(media);
         }
 
-        function duplicatePesoOnTab(e){
+        function duplicatePesoOnTab(e,elt){
+            alert(elt);
             var code = e.keyCode || e.which;
             if(code === 9){
                 duplicatePesoInput();

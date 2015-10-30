@@ -63,15 +63,24 @@ class UsuariosTable extends Table
             ->notEmpty('password');
 
         $validator
-            ->add('email', 'valid', ['rule' => 'email'])
-            ->allowEmpty('email');
+            ->add('password2','no-misspelling',[
+                'rule' => ['compareWith','password'],
+                'message' => 'A senha não confere'
+            ])
+            ->requirePresence('password2')
+            ->notEmpty('password2');
+
+
+        $validator
+            ->add('email', 'valid', [
+                'rule' => 'email',
+                'message' => 'Email inválido'
+            ])
+            ->requirePresence('email')
+            ->notEmpty('email');
 
         $validator
             ->allowEmpty('endereco');
-
-        $validator
-            ->add('id_usuario', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id_usuario', 'create');
 
         $validator
             ->add('autorizacao', 'valid', ['rule' => 'numeric'])

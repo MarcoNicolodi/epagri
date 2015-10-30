@@ -52,14 +52,14 @@ class UsuariosController extends AppController
         if ($this->request->is('post')) {
             $usuario = $this->Usuarios->patchEntity($usuario, $this->request->data);
             if ($this->Usuarios->save($usuario)) {
-                $this->Flash->success(__('The usuario has been saved.'));
+                $this->Flash->success(__('Usuário cadastrado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao cadastrar o usuário. Por favor, tente novamente.'));
             }
         }
-        $cidades = $this->Usuarios->Cidades->find('list', ['limit' => 200]);
-        $this->set(compact('usuario', 'cidades'));
+        $estados = $this->Usuarios->Cidades->Estados->find('list', ['limit' => 200]);
+        $this->set(compact('usuario', 'estados'));
         $this->set('_serialize', ['usuario']);
     }
 
@@ -106,5 +106,9 @@ class UsuariosController extends AppController
             $this->Flash->error(__('The usuario could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login(){
+        $this->viewBuilder()->layout('login');
     }
 }
