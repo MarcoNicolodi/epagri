@@ -59,6 +59,10 @@ class UsuariosTable extends Table
             ->notEmpty('username');
 
         $validator
+            ->requirePresence('sobrenome')
+            ->notEmpty('sobrenome');
+
+        $validator
             ->requirePresence('password', 'create')
             ->notEmpty('password');
 
@@ -69,7 +73,6 @@ class UsuariosTable extends Table
             ])
             ->requirePresence('password2')
             ->notEmpty('password2');
-
 
         $validator
             ->add('email', 'valid', [
@@ -84,7 +87,8 @@ class UsuariosTable extends Table
 
         $validator
             ->add('autorizacao', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('autorizacao');
+            ->requirePresence('autorizacao')
+            ->notEmpty('autorizacao');
 
         return $validator;
     }

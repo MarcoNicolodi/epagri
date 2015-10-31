@@ -19,7 +19,7 @@
                 <th><?= $this->Paginator->sort('usuario_id') ?></th>
                 <th><?= $this->Paginator->sort('endereco') ?></th>
                 <th><?= $this->Paginator->sort('cidade_id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -28,13 +28,13 @@
                 <td><?= $this->Number->format($propriedade->id) ?></td>
                 <td><?= h($propriedade->nome) ?></td>
                 <td><?= $this->Number->format($propriedade->tamanho) ?></td>
-                <td><?= $propriedade->has('usuario') ? $this->Html->link($propriedade->usuario->id_usuario, ['controller' => 'Usuarios', 'action' => 'view', $propriedade->usuario->id_usuario]) : '' ?></td>
+                <td><?= $propriedade->has('usuario') ? $this->Html->link($propriedade->usuario->username, ['controller' => 'Usuarios', 'action' => 'view', $propriedade->usuario->id_usuario]) : '' ?></td>
                 <td><?= h($propriedade->endereco) ?></td>
-                <td><?= $propriedade->has('cidade') ? $this->Html->link($propriedade->cidade->id, ['controller' => 'Cidades', 'action' => 'view', $propriedade->cidade->id]) : '' ?></td>
+                <td><?= $propriedade->has('cidade') ? $this->Html->link($propriedade->cidade->nome, ['controller' => 'Cidades', 'action' => 'view', $propriedade->cidade->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $propriedade->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $propriedade->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $propriedade->id], ['confirm' => __('Are you sure you want to delete # {0}?', $propriedade->id)]) ?>
+                    <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $propriedade->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false]) ?>
+                    <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $propriedade->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false]) ?>
+                    <?= $this->Form->postLink('<i class="fa fa-times fa-white"></i>', ['action' => 'delete', $propriedade->id], ['class' =>'btn btn-danger btn-sm', 'escape' => false, 'confirm' =>'Tem certeza que deseja apagar a propriedade {0}?', $propriedade->nome]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

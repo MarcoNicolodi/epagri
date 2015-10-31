@@ -39,6 +39,10 @@ a:hover {
     border-radius: 5px;
 }
 
+a i.fa-white {
+    color: white;
+}
+
 #login-wrapper {
     background-color: white;
 }

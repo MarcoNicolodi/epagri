@@ -38,6 +38,18 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <?= $this->Form->input('telefone1', ['class' => 'form-control', 'label' => 'Telefone 1']); ?>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?= $this->Form->input('telefone2', ['class' => 'form-control', 'label' => 'Telefone 2']); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <?= $this->Form->input('email', ['class' => 'form-control']); ?>
                         </div>
                     </div>

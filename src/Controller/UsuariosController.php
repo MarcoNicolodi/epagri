@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Usuarios Controller
  *
@@ -10,12 +10,12 @@ use App\Controller\AppController;
  */
 class UsuariosController extends AppController
 {
-
     /**
      * Index method
      *
      * @return void
      */
+
     public function index()
     {
         $this->paginate = [
@@ -108,7 +108,22 @@ class UsuariosController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function login(){
+    public function login()
+    {
         $this->viewBuilder()->layout('login');
+        if($this->request->is('post')){
+            $user = $this->Auth->identify();
+            if($user){
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error('Usuário ou senha incorretos');
+            }
+        }
+    }
+
+    public function logout()
+    {
+
     }
 }

@@ -52,10 +52,6 @@ class PropriedadesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
-
-        $validator
             ->requirePresence('nome', 'create')
             ->notEmpty('nome');
 
@@ -64,7 +60,12 @@ class PropriedadesTable extends Table
             ->allowEmpty('tamanho');
 
         $validator
-            ->allowEmpty('endereco');
+            ->requirePresence('endereco')
+            ->notEmpty('endereco').
+
+        $validator
+            ->requirePresence('cidade_id')
+            ->notEmpty('cidade_id');
 
         return $validator;
     }

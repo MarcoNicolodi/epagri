@@ -46,10 +46,6 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="<?= $this->Url->build('/')?>">PJsis ALFA</a>
                 </div>
@@ -103,7 +99,7 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <a href="#"><i class="fa fa-pagelines  fa-fw"></i> Propriedades<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
-                                        <?= $this->Html->link('Gerenciar', ["controller" => "Prorpiedades","action" => "index"]); ?>
+                                        <?= $this->Html->link('Gerenciar', ["controller" => "Propriedades","action" => "index"]); ?>
                                     </li>
                                     <li>
                                         <?= $this->Html->link('Cadastrar', ["controller" => "Propriedades","action" => "add"]); ?>
