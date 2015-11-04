@@ -46,22 +46,26 @@ class CiclosController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($propriedade_id = NULL)
     {
         $ciclo = $this->Ciclos->newEntity();
         if ($this->request->is('post')) {
+
             $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);
             if ($this->Ciclos->save($ciclo)) {
-                dump($ciclo->toArray());
-                $this->Flash->success(__('The ciclo has been saved.'));
+                $this->Flash->success(__('Ciclo cadastrado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The ciclo could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um erro ao tentar cadastrar o ciclo. Por favor, tente novamente.'));
             }
         }
-        $tanques = $this->Ciclos->Tanques->find('list', ['limit' => 200]);
-        $status = $this->Ciclos->Status->find('list', ['limit' => 200]);
-        $this->set(compact('ciclo', 'tanques', 'status'));
+
+        $propriedades = $this->Ciclos->Tanques->Propriedades->find('list');
+        $tanques = $this->Ciclos->Tanques->find('list')->notMatching('Ciclos', function ($q) {
+                                                        return $q->where(['Ciclos.status_id' => 2]);
+                                                    });
+        $status = $this->Ciclos->Status->find('list');
+        $this->set(compact('ciclo', 'tanques', 'status','propriedades'));
         $this->set('_serialize', ['ciclo']);
     }
 
@@ -80,10 +84,10 @@ class CiclosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);
             if ($this->Ciclos->save($ciclo)) {
-                $this->Flash->success(__('The ciclo has been saved.'));
+                $this->Flash->success(__('Ciclo atualizado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The ciclo could not be saved. Please, try again.'));
+                $this->Flash->error('Ocorreu um problema ao tentar atualizar o Ciclo. Por favor, tente novamente');
             }
         }
         $tanques = $this->Ciclos->Tanques->find('list', ['limit' => 200]);

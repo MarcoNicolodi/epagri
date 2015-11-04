@@ -8,7 +8,7 @@
                   <?= $this->Form->create() ?>
                       <fieldset>
                           <div class="form-group">
-                              <?= $this->Form->input('email', ['class' => 'form-control', 'placeholder' => 'Email', 'label' => false]); ?>
+                              <?= $this->Form->input('email', ['class' => 'form-control', 'placeholder' => 'Email', 'label' => false, 'autofocus' => true]); ?>
                           </div>
                           <div class="form-group">
                               <?= $this->Form->input('password', ['class' => 'form-control', 'placeholder' => 'Senha', 'label' => false]); ?>

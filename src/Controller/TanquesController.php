@@ -10,12 +10,17 @@ use App\Controller\AppController;
  */
 class TanquesController extends AppController
 {
+    //método sem view para usar com AJAX
+    //retorna tanque sque nao estao participando de ciclos
+    public function getInativosByPropriedade($propriedade_id)
+    {
+        $tanques = $this->Tanques->find('list')->matching('Ciclos', function ($q) {
+                                                        return $q->where(['Ciclos.status_id' => 2]);
+                                                    });
+        $this->set('tanques',$tanques);
+        $this->set('_serialize',['tanques']);
+    }
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $this->paginate = [

@@ -49,6 +49,8 @@ class UsuariosController extends AppController
     public function add()
     {
         $usuario = $this->Usuarios->newEntity();
+        $estados = $this->Usuarios->Cidades->Estados->find('list');
+        $autorizacao = ['admin' => 'Administrador', 'epagri' => 'Epagri', 'produtor' => 'Produtor'];
         if ($this->request->is('post')) {
             $usuario = $this->Usuarios->patchEntity($usuario, $this->request->data);
             if ($this->Usuarios->save($usuario)) {
@@ -59,7 +61,7 @@ class UsuariosController extends AppController
             }
         }
         $estados = $this->Usuarios->Cidades->Estados->find('list', ['limit' => 200]);
-        $this->set(compact('usuario', 'estados'));
+        $this->set(compact('usuario', 'estados', 'autorizacao'));
         $this->set('_serialize', ['usuario']);
     }
 

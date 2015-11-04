@@ -7,7 +7,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Event\Event;
-
+use Cake\ORM\TableRegistry;
+use Cake\Model\Table\ArrayObject;
+use Cake\Model\Entity;
 /**
  * Ciclos Model
  *
@@ -30,7 +32,7 @@ class CiclosTable extends Table
         parent::initialize($config);
 
         $this->table('ciclos');
-        $this->displayField('id');
+        $this->displayField('nome');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
 
@@ -72,6 +74,11 @@ class CiclosTable extends Table
             ->allowEmpty('povoamento_inicio');
 
         $validator
+            ->add('tanque_id', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('tanque_id')
+            ->notEmpty('tanque_id');
+
+        $validator
             ->add('data_fim', 'valid', ['rule' => 'date'])
             ->allowEmpty('data_fim');
 
@@ -96,6 +103,25 @@ class CiclosTable extends Table
         return $rules;
     }
 
+    //impede o cadastro de um ciclo em um tanque relacionado a um ciclo em atividade(status_id = 1)
+    public function beforeSave(Event $event, $entity, \ArrayObject $options)
+    {
+        $tanques = TableRegistry::get('Tanques')->find()->notMatching('Ciclos', function ($q) {
+                                                        return $q->where(['Ciclos.status_id' => 1]);
+                                                    })->select('id');
+
+        $ids = [];
+        foreach($tanques as $t){
+            array_push($ids, $t->id);
+        }
+
+        if(in_array($entity->tanque_id,$ids)){
+            $event->stopPropagation();
+            return false;
+        }
+        return;
+    }
+
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
         if(array_key_exists('data_inicio', $data))
@@ -103,9 +129,5 @@ class CiclosTable extends Table
 
         if(array_key_exists('data_fim', $data))
             $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_fim']))))) : '';
-
-        dump($data['data_inicio']);
-
-
     }
 }

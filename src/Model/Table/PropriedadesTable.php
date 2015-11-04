@@ -61,7 +61,7 @@ class PropriedadesTable extends Table
 
         $validator
             ->requirePresence('endereco')
-            ->notEmpty('endereco').
+            ->notEmpty('endereco');
 
         $validator
             ->requirePresence('cidade_id')

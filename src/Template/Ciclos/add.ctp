@@ -1,3 +1,4 @@
+<?php dump($tanques->toArray()) ?>
 <div class="row">
     <div class="col-md-12">
         <h2 class="page-header"> Ciclos </h2>
@@ -11,6 +12,9 @@
             </div>
             <div class="panel-body">
                 <?= $this->Form->create($ciclo) ?>
+                <div class="form-group">
+                    <?= $this->Form->input('propriedade_id', ['options' => $propriedades,'class' => 'form-control']); ?>
+                </div>
                 <div class="form-group">
                     <?= $this->Form->input('tanque_id', ['options' => $tanques,'class' => 'form-control']); ?>
                 </div>
@@ -34,4 +38,24 @@
             </div>
         </div>
     </div>
-</div<
+</div>
+<?php $this->start('script'); ?>
+<?= $this->fetch('script'); ?>
+<script type="text/javascript">
+    $("select[name='propriedade_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Tanques','action' => 'getInativosByPropriedade'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='tanque_id']").empty();
+                $.each(data.tanques, function(k,v){
+                    console.log(v.id, v.nome);
+                    $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                })
+            },
+            error: function(e){
+                console.log("Erro: "+e);
+            }
+        });
+    });
+</script>
+<?php $this->end(); ?>

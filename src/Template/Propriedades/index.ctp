@@ -32,9 +32,9 @@
                 <td><?= h($propriedade->endereco) ?></td>
                 <td><?= $propriedade->has('cidade') ? $this->Html->link($propriedade->cidade->nome, ['controller' => 'Cidades', 'action' => 'view', $propriedade->cidade->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $propriedade->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false]) ?>
-                    <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $propriedade->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false]) ?>
-                    <?= $this->Form->postLink('<i class="fa fa-times fa-white"></i>', ['action' => 'delete', $propriedade->id], ['class' =>'btn btn-danger btn-sm', 'escape' => false, 'confirm' =>'Tem certeza que deseja apagar a propriedade {0}?', $propriedade->nome]) ?>
+                    <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $propriedade->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
+                    <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $propriedade->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Editar']) ?>
+                    <?= $this->Form->postLink('<i class="fa fa-times fa-white"></i>', ['action' => 'delete', $propriedade->id], ['class' =>'btn btn-danger btn-sm', 'escape' => false, 'title' => 'Excluir', 'confirm' =>'Tem certeza que deseja apagar a propriedade {0}?', $propriedade->nome]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -48,6 +48,7 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
+    <?= $this->Html->link(__('Cadastrar'), ['controller' => 'Propriedades', 'action' => 'add'], ['class'=> 'btn btn-lg btn-primary']) ?>
     <div>
 </div>
 </div>

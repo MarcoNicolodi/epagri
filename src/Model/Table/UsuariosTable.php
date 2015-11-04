@@ -86,7 +86,10 @@ class UsuariosTable extends Table
             ->allowEmpty('endereco');
 
         $validator
-            ->add('autorizacao', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('cidade_id')
+            ->notEmpty('cidade_id','Por favor, selecione uma cidade');
+
+        $validator
             ->requirePresence('autorizacao')
             ->notEmpty('autorizacao');
 

@@ -91,3 +91,23 @@
         </div>
     </div>
 </div>
+<?php $this->start('script'); ?>
+<?= $this->fetch('script'); ?>
+<script type="text/javascript">
+    $("select[name='estado_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Cidades','action' => 'getByEstado'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='cidade_id']").empty();
+                $.each(data.cidades, function(k,v){
+                    console.log(v.id, v.nome);
+                    $("select[name='cidade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                })
+            },
+            error: function(e){
+                console.log("Erro: "+e);
+            }
+        });
+    });
+</script>
+<?php $this->end(); ?>

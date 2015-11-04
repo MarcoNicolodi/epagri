@@ -6,7 +6,6 @@ a:hover {
     color: #2ecc71;
 }
 
-/*
 .btn-default {
     background-color: #27ae60;
     border: solid 1px #27ae60;
@@ -16,7 +15,7 @@ a:hover {
     background-color: #2ecc71;
     border: solid 1px #2ecc71;
 }
-*/
+
 .navbar-static-top{
     border-bottom: 2px solid #e74c3c;
 }
@@ -41,6 +40,10 @@ a:hover {
 
 a i.fa-white {
     color: white;
+}
+
+.white {
+    color:white;
 }
 
 #login-wrapper {

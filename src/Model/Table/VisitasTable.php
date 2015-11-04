@@ -34,10 +34,6 @@ class VisitasTable extends Table
             'foreignKey' => 'ciclo_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('ParametrosIdeais', [
-            'foreignKey' => 'params_ideais_id',
-            'joinType' => 'INNER'
-        ]);
 
         $this->hasOne('Notificacoes', [
             'foreignKey' => 'visita_id',
@@ -93,7 +89,6 @@ class VisitasTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['ciclo_id'], 'Ciclos'));
-        $rules->add($rules->existsIn(['params_ideais_id'], 'ParametrosIdeais'));
         return $rules;
     }
 }

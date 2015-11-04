@@ -78,7 +78,6 @@ class VisitasController extends AppController
             }
         }
         $ciclos = $this->Visitas->Ciclos->find('list', ['limit' => 200]);
-        $parametrosIdeais = $this->Visitas->ParametrosIdeais->find('list', ['limit' => 200]);
         $this->set(compact('visita', 'ciclos', 'parametrosIdeais'));
         $this->set('_serialize', ['visita']);
     }
@@ -105,7 +104,6 @@ class VisitasController extends AppController
             }
         }
         $ciclos = $this->Visitas->Ciclos->find('list', ['limit' => 200]);
-        $parametrosIdeais = $this->Visitas->ParametrosIdeais->find('list', ['limit' => 200]);
         $this->set(compact('visita', 'ciclos', 'parametrosIdeais'));
         $this->set('_serialize', ['visita']);
     }

@@ -120,6 +120,18 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
+                                <a href="#"><i class="fa fa-suitcase fa-fw"></i> Visitas<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <?= $this->Html->link('Gerenciar', ["controller" => "Visitas","action" => "index"]); ?>
+                                    </li>
+                                    <li>
+                                        <?= $this->Html->link('Cadastrar', ["controller" => "Visitas","action" => "add"]); ?>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
                                 <a href="#"><i class="fa fa-gears fa-fw"></i> Configurações<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>

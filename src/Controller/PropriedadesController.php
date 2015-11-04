@@ -35,7 +35,7 @@ class PropriedadesController extends AppController
     public function view($id = null)
     {
         $propriedade = $this->Propriedades->get($id, [
-            'contain' => ['Usuarios', 'Cidades', 'Tanques']
+            'contain' => ['Usuarios', 'Cidades' => ['Estados'], 'Tanques' => ['Ciclos']]
         ]);
         $this->set('propriedade', $propriedade);
         $this->set('_serialize', ['propriedade']);
@@ -59,8 +59,8 @@ class PropriedadesController extends AppController
             }
         }
         $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200]);
-        $cidades = $this->Propriedades->Cidades->find('list', ['limit' => 200]);
-        $this->set(compact('propriedade', 'usuarios', 'cidades'));
+        $estados = $this->Propriedades->Cidades->Estados->find('list', ['limit' => 200]);
+        $this->set(compact('propriedade', 'usuarios', 'estados'));
         $this->set('_serialize', ['propriedade']);
     }
 
