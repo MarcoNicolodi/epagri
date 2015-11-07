@@ -3,19 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Propriedades Controller
- *
- * @property \App\Model\Table\PropriedadesTable $Propriedades
- */
 class PropriedadesController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return void
-     */
     //método sem view para usar com AJAX
     public function getByUsuario($usuario_id)
     {
@@ -33,13 +22,6 @@ class PropriedadesController extends AppController
         $this->set('_serialize', ['propriedades']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Propriedade id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $propriedade = $this->Propriedades->get($id, [
@@ -49,21 +31,16 @@ class PropriedadesController extends AppController
         $this->set('_serialize', ['propriedade']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $propriedade = $this->Propriedades->newEntity();
         if ($this->request->is('post')) {
             $propriedade = $this->Propriedades->patchEntity($propriedade, $this->request->data);
             if ($this->Propriedades->save($propriedade)) {
-                $this->Flash->success(__('The propriedade has been saved.'));
+                $this->Flash->success(__('Propriedade cadastrada com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The propriedade could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar a propriedade. Por favor, tente novamente.'));
             }
         }
         $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200]);
@@ -72,13 +49,6 @@ class PropriedadesController extends AppController
         $this->set('_serialize', ['propriedade']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Propriedade id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $propriedade = $this->Propriedades->get($id, [
@@ -87,10 +57,10 @@ class PropriedadesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $propriedade = $this->Propriedades->patchEntity($propriedade, $this->request->data);
             if ($this->Propriedades->save($propriedade)) {
-                $this->Flash->success(__('The propriedade has been saved.'));
+                $this->Flash->success(__('Propriedade atualizada com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The propriedade could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar atualizar a propriedade. Por favor, tente novamente.'));
             }
         }
         $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200]);
@@ -99,21 +69,14 @@ class PropriedadesController extends AppController
         $this->set('_serialize', ['propriedade']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Propriedade id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $propriedade = $this->Propriedades->get($id);
         if ($this->Propriedades->delete($propriedade)) {
-            $this->Flash->success(__('The propriedade has been deleted.'));
+            $this->Flash->success(__('Propriedade excluida com sucesso.'));
         } else {
-            $this->Flash->error(__('The propriedade could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ocorreu um problema ao tentar excluir a propriedade. Por favor, tente novamente.'));
         }
         return $this->redirect(['action' => 'index']);
     }

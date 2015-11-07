@@ -135,117 +135,115 @@
 <?= $this->fetch('script'); ?>
 <script type="text/javascript">
 
-        var pesoCount = 1;
-        function duplicatePesoInput(){
-            pesoCount++;
-            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso ' + pesoCount + '</label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event,this)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+    var pesoCount = 1;
+    function duplicatePesoInput(){
+        pesoCount++;
+        $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso ' + pesoCount + '</label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event,this)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+    }
+
+    function duplicateComprimentoInput(){
+        $("#calc-comprimento-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_comprimento[]\" onkeydown=\"dublicateComprimentoOnTab(e)\"><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+    }
+
+    function deleteNode(elt){
+        $(elt).closest("div").remove();
+    }
+
+    function calculateFishWeight(){
+        $("#calc-peso-modal").modal('hide');
+
+        inputs = document.getElementsByName('calc_peso[]');
+        count = 0;
+        soma = 0;
+        console.log(" LENGTH: "+inputs.length);
+        for(i=0; i<=inputs.length-1; i++){
+            console.log(" INPUT "+i+": "+inputs[i].value);
+            soma += parseFloat(inputs[i].value);
+            count++;
         }
+        media = soma/count;
 
-        function duplicateComprimentoInput(){
-            $("#calc-comprimento-modal .modal-body").append('<div class=\"form-group\"><label> Peso </label><input class=\"form-control\" name=\"calc_comprimento[]\" onkeydown=\"dublicateComprimentoOnTab(e)\"><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+        $("#weight-notification").addClass("alert alert-success").html("<p>Peso médio calculado com sucesso.</p>");
+        document.getElementsByName('peso_peixes')[0].value = media;
+
+        console.log(" SOMA "+soma+" MEDIA "+media+" COUNT "+count);
+    }
+
+    function calculateFishWidth(){
+        $("#calc-comprimento-modal").modal('hide');
+
+        inputs = document.getElementsByName('calc_comprimento[]');
+        count = 0;
+        soma = 0;
+        for(i=0; i<=inputs.length-1; i++){
+            soma += parseFloat(inputs[i].value);
+            count++;
         }
+        media = soma/count;
 
-        function deleteNode(elt){
-            $(elt).closest("div").remove();
+        $("#width-notification").addClass("alert alert-success").html("<p>Comprimento médio calculado com sucesso.</p>");
+        document.getElementsByName('largura_peixes')[0].value = media;
+
+        console.log(media);
+    }
+
+    function duplicatePesoOnTab(e,elt){
+        alert(elt);
+        var code = e.keyCode || e.which;
+        if(code === 9){
+            duplicatePesoInput();
         }
+    }
 
-        function calculateFishWeight(){
-            $("#calc-peso-modal").modal('hide');
-
-            inputs = document.getElementsByName('calc_peso[]');
-            count = 0;
-            soma = 0;
-            console.log(" LENGTH: "+inputs.length);
-            for(i=0; i<=inputs.length-1; i++){
-                console.log(" INPUT "+i+": "+inputs[i].value);
-                soma += parseFloat(inputs[i].value);
-                count++;
+    $("select[name='tanque_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Ciclos','action' => 'getAtivosByTanque'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='ciclo_id']").empty();
+                $.each(data.ciclos, function(k,v){
+                    console.log(v.id, v.nome);
+                    $("select[name='ciclo_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                })
+            },
+            error: function(e){
+                console.log("Erro: "+e);
             }
-            media = soma/count;
+        });
+    });
 
-            $("#weight-notification").addClass("alert alert-success").html("<p>Peso médio calculado com sucesso.</p>");
-            document.getElementsByName('peso_peixes')[0].value = media;
-
-            console.log(" SOMA "+soma+" MEDIA "+media+" COUNT "+count);
-        }
-
-        function calculateFishWidth(){
-            $("#calc-comprimento-modal").modal('hide');
-
-            inputs = document.getElementsByName('calc_comprimento[]');
-            count = 0;
-            soma = 0;
-            for(i=0; i<=inputs.length-1; i++){
-                soma += parseFloat(inputs[i].value);
-                count++;
+    //pega propriedades por usuario
+    $("select[name='usuario_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Propriedades','action' => 'getByUsuario'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='propriedade_id']").empty();
+                $("select[name='propriedade_id']").append("<option value='"+null+"'>Selecione uma Propriedade</option>");
+                $.each(data.propriedades, function(k,v){
+                    $("select[name='propriedade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                });
+            },
+            error: function(e){
+                console.log("Erro: "+e);
             }
-            media = soma/count;
+        });
+    });
 
-            $("#width-notification").addClass("alert alert-success").html("<p>Comprimento médio calculado com sucesso.</p>");
-            document.getElementsByName('largura_peixes')[0].value = media;
-
-            console.log(media);
-        }
-
-        function duplicatePesoOnTab(e,elt){
-            alert(elt);
-            var code = e.keyCode || e.which;
-            if(code === 9){
-                duplicatePesoInput();
+    //pega tanques por propriedade
+    $("select[name='propriedade_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Tanques','action' => 'getAtivosByPropriedade'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='tanque_id']").empty();
+                $("select[name='tanque_id']").append("<option value='"+null+"'>Selecione uma tanque</option>");
+                $.each(data.tanques, function(k,v){
+                    $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                })
+            },
+            error: function(e){
+                console.log("Erro: "+e);
             }
-        }
-
-
-
-        $("select[name='tanque_id']").change(function(){
-            $.ajax({
-                url: "<?= $this->Url->build(['controller' => 'Ciclos','action' => 'getAtivosByTanque'])?>"+"/"+this.value+".json",
-                success: function(data){
-                    $("select[name='ciclo_id']").empty();
-                    $.each(data.ciclos, function(k,v){
-                        console.log(v.id, v.nome);
-                        $("select[name='ciclo_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
-                    })
-                },
-                error: function(e){
-                    console.log("Erro: "+e);
-                }
-            });
         });
-
-        //pega propriedades por usuario
-        $("select[name='usuario_id']").change(function(){
-            $.ajax({
-                url: "<?= $this->Url->build(['controller' => 'Propriedades','action' => 'getByUsuario'])?>"+"/"+this.value+".json",
-                success: function(data){
-                    $("select[name='propriedade_id']").empty();
-                    $("select[name='propriedade_id']").append("<option value='"+null+"'>Selecione uma Propriedade</option>");
-                    $.each(data.propriedades, function(k,v){
-                        $("select[name='propriedade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
-                    });
-                },
-                error: function(e){
-                    console.log("Erro: "+e);
-                }
-            });
-        });
-
-        //pega tanques por propriedade
-        $("select[name='propriedades_id']").change(function(){
-            $.ajax({
-                url: "<?= $this->Url->build(['controller' => 'Tanques','action' => 'getByPropriedade'])?>"+"/"+this.value+".json",
-                success: function(data){
-                    $("select[name='tanque_id']").empty();
-                    $.each(data.tanques, function(k,v){
-                        console.log(v.id, v.nome);
-                        $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
-                    })
-                },
-                error: function(e){
-                    console.log("Erro: "+e);
-                }
-            });
-        });
+    });
 
 </script>
 <?php $this->end(); ?>

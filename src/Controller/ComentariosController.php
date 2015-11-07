@@ -3,19 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Comentarios Controller
- *
- * @property \App\Model\Table\ComentariosTable $Comentarios
- */
 class ComentariosController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $this->paginate = [
@@ -25,13 +14,6 @@ class ComentariosController extends AppController
         $this->set('_serialize', ['comentarios']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Comentario id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $comentario = $this->Comentarios->get($id, [
@@ -41,21 +23,16 @@ class ComentariosController extends AppController
         $this->set('_serialize', ['comentario']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $comentario = $this->Comentarios->newEntity();
         if ($this->request->is('post')) {
             $comentario = $this->Comentarios->patchEntity($comentario, $this->request->data);
             if ($this->Comentarios->save($comentario)) {
-                $this->Flash->success(__('The comentario has been saved.'));
+                $this->Flash->success(__('Comentário cadastrado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The comentario could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar o comentário. Por favor, tente novamente.'));
             }
         }
         $usuarios = $this->Comentarios->Usuarios->find('list', ['limit' => 200]);
@@ -64,13 +41,6 @@ class ComentariosController extends AppController
         $this->set('_serialize', ['comentario']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Comentario id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $comentario = $this->Comentarios->get($id, [
@@ -79,10 +49,10 @@ class ComentariosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $comentario = $this->Comentarios->patchEntity($comentario, $this->request->data);
             if ($this->Comentarios->save($comentario)) {
-                $this->Flash->success(__('The comentario has been saved.'));
+                $this->Flash->success(__('Comentário atualizado com suceso'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The comentario could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar atualizar o comentário. Por favor, tente novamente.'));
             }
         }
         $usuarios = $this->Comentarios->Usuarios->find('list', ['limit' => 200]);
@@ -91,21 +61,14 @@ class ComentariosController extends AppController
         $this->set('_serialize', ['comentario']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Comentario id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $comentario = $this->Comentarios->get($id);
         if ($this->Comentarios->delete($comentario)) {
-            $this->Flash->success(__('The comentario has been deleted.'));
+            $this->Flash->success(__('Comentario excluído com sucesso'));
         } else {
-            $this->Flash->error(__('The comentario could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ocorreu um problema ao tentar excluir o comentário. Por favor, tente novamente.'));
         }
         return $this->redirect(['action' => 'index']);
     }

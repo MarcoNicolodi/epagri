@@ -10,23 +10,10 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Model\Table\ArrayObject;
 use Cake\Model\Entity;
-/**
- * Ciclos Model
- *
- * @property \Cake\ORM\Association\BelongsTo $Tanques
- * @property \Cake\ORM\Association\BelongsTo $Status
- * @property \Cake\ORM\Association\HasMany $EspeciesCategoriasCultivos
- * @property \Cake\ORM\Association\HasMany $Visitas
- */
+
 class CiclosTable extends Table
 {
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -52,12 +39,6 @@ class CiclosTable extends Table
         ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
     public function validationDefault(Validator $validator)
     {
         $validator
@@ -89,13 +70,6 @@ class CiclosTable extends Table
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['tanque_id'], 'Tanques'));

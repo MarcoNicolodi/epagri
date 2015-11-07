@@ -24,7 +24,7 @@
                 </dl>
                 <dl>
                     <dt>Proprietário</dt>
-                    <dd> </dd>
+                    <dd><?= h($tanque->propriedade->usuario->username) ?></dd>
                 </dl>
                 <dl>
                     <dt>Capacidade</dt>

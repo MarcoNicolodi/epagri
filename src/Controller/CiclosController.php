@@ -3,14 +3,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Ciclos Controller
- *
- * @property \App\Model\Table\CiclosTable $Ciclos
- */
 class CiclosController extends AppController
 {
 
+    //método sem view para usar com ajax
     public function getAtivosByTanque($tanque_id)
     {
         $ciclos = $this->Ciclos->find('list')->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
@@ -18,12 +14,6 @@ class CiclosController extends AppController
         $this->set('_serialize',['ciclos']);
     }
 
-
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $this->paginate = [
@@ -33,13 +23,6 @@ class CiclosController extends AppController
         $this->set('_serialize', ['ciclos']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Ciclo id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $ciclo = $this->Ciclos->get($id, [
@@ -49,11 +32,6 @@ class CiclosController extends AppController
         $this->set('_serialize', ['ciclo']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $ciclo = $this->Ciclos->newEntity();
@@ -76,13 +54,6 @@ class CiclosController extends AppController
         $this->set('_serialize', ['ciclo']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Ciclo id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $ciclo = $this->Ciclos->get($id, [
@@ -103,13 +74,6 @@ class CiclosController extends AppController
         $this->set('_serialize', ['ciclo']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Ciclo id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

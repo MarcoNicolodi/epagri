@@ -3,19 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Estoques Controller
- *
- * @property \App\Model\Table\EstoquesTable $Estoques
- */
 class EstoquesController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $this->paginate = [
@@ -25,13 +15,6 @@ class EstoquesController extends AppController
         $this->set('_serialize', ['estoques']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Estoque id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $estoque = $this->Estoques->get($id, [
@@ -41,11 +24,6 @@ class EstoquesController extends AppController
         $this->set('_serialize', ['estoque']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $estoque = $this->Estoques->newEntity();
@@ -64,13 +42,6 @@ class EstoquesController extends AppController
         $this->set('_serialize', ['estoque']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Estoque id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $estoque = $this->Estoques->get($id, [
@@ -91,13 +62,6 @@ class EstoquesController extends AppController
         $this->set('_serialize', ['estoque']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Estoque id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

@@ -3,19 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
-/**
- * Usuarios Controller
- *
- * @property \App\Model\Table\UsuariosTable $Usuarios
- */
+
 class UsuariosController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return void
-     */
-
     public function index()
     {
         $this->paginate = [
@@ -25,13 +15,6 @@ class UsuariosController extends AppController
         $this->set('_serialize', ['usuarios']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Usuario id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $usuario = $this->Usuarios->get($id, [
@@ -41,11 +24,6 @@ class UsuariosController extends AppController
         $this->set('_serialize', ['usuario']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $usuario = $this->Usuarios->newEntity();
@@ -57,7 +35,7 @@ class UsuariosController extends AppController
                 $this->Flash->success(__('Usuário cadastrado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('Ocorreu um problema ao cadastrar o usuário. Por favor, tente novamente.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar o usuário. Por favor, tente novamente.'));
             }
         }
         $estados = $this->Usuarios->Cidades->Estados->find('list', ['limit' => 200]);
@@ -65,13 +43,6 @@ class UsuariosController extends AppController
         $this->set('_serialize', ['usuario']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Usuario id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $usuario = $this->Usuarios->get($id, [
@@ -80,10 +51,10 @@ class UsuariosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $usuario = $this->Usuarios->patchEntity($usuario, $this->request->data);
             if ($this->Usuarios->save($usuario)) {
-                $this->Flash->success(__('The usuario has been saved.'));
+                $this->Flash->success(__('Usuário cadastrado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar atualizar o usuário. Por favor, tente novamente.'));
             }
         }
         $cidades = $this->Usuarios->Cidades->find('list', ['limit' => 200]);
@@ -91,21 +62,14 @@ class UsuariosController extends AppController
         $this->set('_serialize', ['usuario']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Usuario id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $usuario = $this->Usuarios->get($id);
         if ($this->Usuarios->delete($usuario)) {
-            $this->Flash->success(__('The usuario has been deleted.'));
+            $this->Flash->success(__('Usuário excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The usuario could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ocorreu um problema ao tentar excluir o usuário. Por favor, tente novamente.'));
         }
         return $this->redirect(['action' => 'index']);
     }

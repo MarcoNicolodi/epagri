@@ -3,19 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * EspeciesCategoriasCultivos Controller
- *
- * @property \App\Model\Table\EspeciesCategoriasCultivosTable $EspeciesCategoriasCultivos
- */
 class EspeciesCategoriasCultivosController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function index()
     {
         $this->paginate = [
@@ -25,13 +15,6 @@ class EspeciesCategoriasCultivosController extends AppController
         $this->set('_serialize', ['especiesCategoriasCultivos']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Especies Categorias Cultivo id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $especiesCategoriasCultivo = $this->EspeciesCategoriasCultivos->get($id, [
@@ -41,11 +24,6 @@ class EspeciesCategoriasCultivosController extends AppController
         $this->set('_serialize', ['especiesCategoriasCultivo']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $especiesCategoriasCultivo = $this->EspeciesCategoriasCultivos->newEntity();
@@ -65,13 +43,6 @@ class EspeciesCategoriasCultivosController extends AppController
         $this->set('_serialize', ['especiesCategoriasCultivo']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Especies Categorias Cultivo id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $especiesCategoriasCultivo = $this->EspeciesCategoriasCultivos->get($id, [
@@ -93,13 +64,6 @@ class EspeciesCategoriasCultivosController extends AppController
         $this->set('_serialize', ['especiesCategoriasCultivo']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Especies Categorias Cultivo id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

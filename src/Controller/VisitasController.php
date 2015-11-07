@@ -3,19 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Visitas Controller
- *
- * @property \App\Model\Table\VisitasTable $Visitas
- */
 class VisitasController extends AppController
 {
 
-    /**
-     * Index method
-     *
-     * @return void
-     */
     public function initialize()
     {
         parent::initialize();
@@ -31,13 +21,6 @@ class VisitasController extends AppController
         $this->set('_serialize', ['visitas']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Visita id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $visita = $this->Visitas->get($id, [
@@ -47,11 +30,6 @@ class VisitasController extends AppController
         $this->set('_serialize', ['visita']);
     }
 
-    /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $visita = $this->Visitas->newEntity();
@@ -82,13 +60,6 @@ class VisitasController extends AppController
         $this->set('_serialize', ['visita']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Visita id.
-     * @return void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $visita = $this->Visitas->get($id, [
@@ -97,10 +68,10 @@ class VisitasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $visita = $this->Visitas->patchEntity($visita, $this->request->data);
             if ($this->Visitas->save($visita)) {
-                $this->Flash->success(__('The visita has been saved.'));
+                $this->Flash->success(__('Visita atualizada com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The visita could not be saved. Please, try again.'));
+                $this->Flash->error(__('Ocorreu um problema ao tentar atualizar a visita. Por favor, tente novamente.'));
             }
         }
         $ciclos = $this->Visitas->Ciclos->find('list', ['limit' => 200]);
@@ -108,21 +79,14 @@ class VisitasController extends AppController
         $this->set('_serialize', ['visita']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Visita id.
-     * @return void Redirects to index.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $visita = $this->Visitas->get($id);
         if ($this->Visitas->delete($visita)) {
-            $this->Flash->success(__('The visita has been deleted.'));
+            $this->Flash->success(__('Visita excluída com sucesso.'));
         } else {
-            $this->Flash->error(__('The visita could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ocorreu um problema ao tentar excluir a visita. Por favor, tente novamente.'));
         }
         return $this->redirect(['action' => 'index']);
     }
