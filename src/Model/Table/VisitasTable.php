@@ -74,7 +74,14 @@ class VisitasTable extends Table
             ->allowEmpty('peso_peixes');
 
         $validator
-            ->allowEmpty('data');
+            ->add('ciclo_id','valid',['rule' => 'numeric'])
+            ->requirePresence('ciclo_id')
+            ->notEmpty('ciclo_id');
+
+        // $validator
+        //     ->add('data','valid',['rule' => 'date'])
+        //     ->requirePresense('data')
+        //     ->notEmpty('data');
 
         return $validator;
     }

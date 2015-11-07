@@ -115,19 +115,20 @@ class CiclosTable extends Table
             array_push($ids, $t->id);
         }
 
-        if(in_array($entity->tanque_id,$ids)){
+        if(!in_array($entity->tanque_id,$ids)){
             $event->stopPropagation();
             return false;
         }
-        return;
+        return true;
     }
 
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
         if(array_key_exists('data_inicio', $data))
-            $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_inicio']))))) : '';
+            $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime($data['data_inicio'])) : '';
 
         if(array_key_exists('data_fim', $data))
             $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_fim']))))) : '';
+
     }
 }

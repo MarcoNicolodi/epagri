@@ -96,13 +96,25 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-pagelines  fa-fw"></i> Propriedades<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-pagelines fa-fw"></i> Propriedades<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
                                         <?= $this->Html->link('Gerenciar', ["controller" => "Propriedades","action" => "index"]); ?>
                                     </li>
                                     <li>
                                         <?= $this->Html->link('Cadastrar', ["controller" => "Propriedades","action" => "add"]); ?>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-tint fa-fw"></i> Tanques<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <?= $this->Html->link('Gerenciar', ["controller" => "Tanques","action" => "index"]); ?>
+                                    </li>
+                                    <li>
+                                        <?= $this->Html->link('Cadastrar', ["controller" => "Tanques","action" => "add"]); ?>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

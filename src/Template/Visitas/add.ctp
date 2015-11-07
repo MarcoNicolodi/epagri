@@ -72,7 +72,7 @@
                         <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#calc-peso-modal"> Calcular média de peso dos peixes </button>
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#calc-comprimento-modal"> Calcular média de altura dos peixes </button>
+                        <button class="btn btn-primary  btn-block" data-toggle="modal" data-target="#calc-comprimento-modal"> Calcular média de largura dos peixes </button>
                     </div>
                 </div>
             </div>
@@ -87,28 +87,43 @@
             </div>
             <div class="panel-body">
                 <?= $this->Form->create($visita) ?>
-                    <div class="form-group">
-                        <?=  $this->Form->input('ciclo_id', ['options' => $ciclos, 'class' => 'form-control']); ?>
-                    </div>
-                    <div class="form-group">
-                        <?=  $this->Form->input('oxigenio_agua', ['class' => 'form-control', 'label' => 'Nível de Oxigenação da Água']); ?>
-                    </div>
-                    <div class="form-group">
-                        <?= $this->Form->input('ionizacao_agua', ['class' => 'form-control', 'label' => 'Nível de Ionização da Água']); ?>
-                    </div>
-                    <div class="form-group">
-                        <?= $this->Form->input('temperatura_agua' , ['class' => 'form-control', 'label' => 'Temperatura da Água']); ?>
-                    </div>
-                    <div class="form-group">
-                        <?= $this->Form->input('largura_peixes', ['class' => 'form-control', 'label' => 'Largura Média dos Peixes']); ?>
-                        <div id="width-notification"></div>
-                    </div>
-                    <div class="form-group">
-                        <?= $this->Form->input('peso_peixes', ['class' => 'form-control', 'label' => 'Peso Médio dos Peixes']); ?>
-                        <div id="weight-notification"></div>
-                    </div>
-                    <div class="form-group">
-                        <?= $this->Form->input('data', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <?=  $this->Form->input('usuario_id', ['options' => $usuarios, 'class' => 'form-control', 'label' => 'Produtor']); ?>
+                            </div>
+                            <div class="form-group">
+                                <?=  $this->Form->input('propriedade_id', ['options' => [null => 'Selecione um produtor' ], 'class' => 'form-control']); ?>
+                            </div>
+                            <div class="form-group">
+                                <?=  $this->Form->input('tanque_id', ['options' => [null => 'Selecione uma propriedade'], 'class' => 'form-control']); ?>
+                            </div>
+                            <div class="form-group">
+                                <?=  $this->Form->input('ciclo_id', ['options' => [null => 'Escolha um tanque'], 'class' => 'form-control', 'disabled' => true]); ?>
+                            </div>
+                            <div class="form-group">
+                                <?=  $this->Form->input('oxigenio_agua', ['class' => 'form-control', 'label' => 'Nível de Oxigenação da Água']); ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <?= $this->Form->input('ionizacao_agua', ['class' => 'form-control', 'label' => 'Nível de Ionização da Água']); ?>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->input('temperatura_agua' , ['class' => 'form-control', 'label' => 'Temperatura da Água']); ?>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->input('largura_peixes', ['class' => 'form-control', 'label' => 'Largura Média dos Peixes']); ?>
+                                <div id="width-notification"></div>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->input('peso_peixes', ['class' => 'form-control', 'label' => 'Peso Médio dos Peixes']); ?>
+                                <div id="weight-notification"></div>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->input('data', ['type' => 'text', 'class' => 'form-control datepicker']); ?>
+                            </div>
+                        </div>
                     </div>
                 <?= $this->Form->button('Cadastrar', ['class' => 'btn btn-lg btn-primary btn-default']) ?>
                 <?= $this->Form->end() ?>
@@ -123,7 +138,7 @@
         var pesoCount = 1;
         function duplicatePesoInput(){
             pesoCount++;
-            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso ' + pesoCount + '</label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
+            $("#calc-peso-modal .modal-body").append('<div class=\"form-group\"><label> Peso ' + pesoCount + '</label><input class=\"form-control\" name=\"calc_peso[]\" onkeydown=\"duplicatePesoOnTab(event,this)\" autofocus><a class=\"btn btn-danger\" onClick=\"deleteNode(this)\"><i class=\"fa fa-minus\"></i></a></div>');
         }
 
         function duplicateComprimentoInput(){
@@ -131,13 +146,6 @@
         }
 
         function deleteNode(elt){
-            // console.log($(elt.parentNode.firstChild.innerHTML.charAt(elt.parentNode.firstChild.innerHTML.length - 1)));
-            // atual = 3, total = 5, entao 4 deve virar 3, 5 virar 4, ou seja, pega os proximos siblings
-            // if(elt.parentNode.nextSibling);
-            // console.log($(elt).parent().children().first());
-            // start = parseInt(elt.parentNode.firstChild.innerHTML.charAt(elt.parentNode.firstChild.innerHTML.length - 1));
-            // console.log($(elt.previousNode));
-
             $(elt).closest("div").remove();
         }
 
@@ -186,6 +194,58 @@
                 duplicatePesoInput();
             }
         }
+
+
+
+        $("select[name='tanque_id']").change(function(){
+            $.ajax({
+                url: "<?= $this->Url->build(['controller' => 'Ciclos','action' => 'getAtivosByTanque'])?>"+"/"+this.value+".json",
+                success: function(data){
+                    $("select[name='ciclo_id']").empty();
+                    $.each(data.ciclos, function(k,v){
+                        console.log(v.id, v.nome);
+                        $("select[name='ciclo_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                    })
+                },
+                error: function(e){
+                    console.log("Erro: "+e);
+                }
+            });
+        });
+
+        //pega propriedades por usuario
+        $("select[name='usuario_id']").change(function(){
+            $.ajax({
+                url: "<?= $this->Url->build(['controller' => 'Propriedades','action' => 'getByUsuario'])?>"+"/"+this.value+".json",
+                success: function(data){
+                    $("select[name='propriedade_id']").empty();
+                    $("select[name='propriedade_id']").append("<option value='"+null+"'>Selecione uma Propriedade</option>");
+                    $.each(data.propriedades, function(k,v){
+                        $("select[name='propriedade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                    });
+                },
+                error: function(e){
+                    console.log("Erro: "+e);
+                }
+            });
+        });
+
+        //pega tanques por propriedade
+        $("select[name='propriedades_id']").change(function(){
+            $.ajax({
+                url: "<?= $this->Url->build(['controller' => 'Tanques','action' => 'getByPropriedade'])?>"+"/"+this.value+".json",
+                success: function(data){
+                    $("select[name='tanque_id']").empty();
+                    $.each(data.tanques, function(k,v){
+                        console.log(v.id, v.nome);
+                        $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                    })
+                },
+                error: function(e){
+                    console.log("Erro: "+e);
+                }
+            });
+        });
 
 </script>
 <?php $this->end(); ?>

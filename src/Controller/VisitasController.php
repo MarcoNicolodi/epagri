@@ -77,8 +77,8 @@ class VisitasController extends AppController
                 $this->Flash->error(__('Ocorreu um erro ao tentar salvar os dados da visita. Por favor, tente novamente.'));
             }
         }
-        $ciclos = $this->Visitas->Ciclos->find('list', ['limit' => 200]);
-        $this->set(compact('visita', 'ciclos', 'parametrosIdeais'));
+        $usuarios = $this->Visitas->Ciclos->Tanques->Propriedades->Usuarios->find('list');
+        $this->set(compact('visita', 'usuarios'));
         $this->set('_serialize', ['visita']);
     }
 

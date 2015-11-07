@@ -1,4 +1,3 @@
-<?php dump($tanques->toArray()) ?>
 <div class="row">
     <div class="col-md-12">
         <h2 class="page-header"> Ciclos </h2>

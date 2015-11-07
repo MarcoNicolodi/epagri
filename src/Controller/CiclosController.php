@@ -11,6 +11,14 @@ use App\Controller\AppController;
 class CiclosController extends AppController
 {
 
+    public function getAtivosByTanque($tanque_id)
+    {
+        $ciclos = $this->Ciclos->find('list')->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
+        $this->set('ciclos',$ciclos);
+        $this->set('_serialize',['ciclos']);
+    }
+
+
     /**
      * Index method
      *
@@ -46,11 +54,10 @@ class CiclosController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($propriedade_id = NULL)
+    public function add()
     {
         $ciclo = $this->Ciclos->newEntity();
         if ($this->request->is('post')) {
-
             $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);
             if ($this->Ciclos->save($ciclo)) {
                 $this->Flash->success(__('Ciclo cadastrado com sucesso.'));
@@ -62,7 +69,7 @@ class CiclosController extends AppController
 
         $propriedades = $this->Ciclos->Tanques->Propriedades->find('list');
         $tanques = $this->Ciclos->Tanques->find('list')->notMatching('Ciclos', function ($q) {
-                                                        return $q->where(['Ciclos.status_id' => 2]);
+                                                        return $q->where(['Ciclos.status_id' => 1]);
                                                     });
         $status = $this->Ciclos->Status->find('list');
         $this->set(compact('ciclo', 'tanques', 'status','propriedades'));
@@ -90,8 +97,8 @@ class CiclosController extends AppController
                 $this->Flash->error('Ocorreu um problema ao tentar atualizar o Ciclo. Por favor, tente novamente');
             }
         }
-        $tanques = $this->Ciclos->Tanques->find('list', ['limit' => 200]);
-        $status = $this->Ciclos->Status->find('list', ['limit' => 200]);
+        $tanques = $this->Ciclos->Tanques->find('list');
+        $status = $this->Ciclos->Status->find('list');
         $this->set(compact('ciclo', 'tanques', 'status'));
         $this->set('_serialize', ['ciclo']);
     }
@@ -108,9 +115,9 @@ class CiclosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $ciclo = $this->Ciclos->get($id);
         if ($this->Ciclos->delete($ciclo)) {
-            $this->Flash->success(__('The ciclo has been deleted.'));
+            $this->Flash->success(__('Ciclo excluído com sucesso.'));
         } else {
-            $this->Flash->error(__('The ciclo could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ocorreu um problema ao tentar excluir o Ciclo. Por favor, tente novamente.'));
         }
         return $this->redirect(['action' => 'index']);
     }

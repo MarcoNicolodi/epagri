@@ -16,6 +16,14 @@ class PropriedadesController extends AppController
      *
      * @return void
      */
+    //método sem view para usar com AJAX
+    public function getByUsuario($usuario_id)
+    {
+        $propriedades = $this->Propriedades->find()->where(['usuario_id' => $usuario_id]);
+        $this->set('propriedades',$propriedades);
+        $this->set('_serialize',['propriedades']);
+    }
+
     public function index()
     {
         $this->paginate = [

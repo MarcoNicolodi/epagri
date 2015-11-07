@@ -21,6 +21,15 @@ class TanquesController extends AppController
         $this->set('_serialize',['tanques']);
     }
 
+    public function getAtivosByPropriedade($propriedade_id)
+    {
+        $tanques = $this->Tanques->find('list')->where(['propriedade_id' => $propriedade_id])->matching('Ciclos', function ($q) {
+                                                        return $q->where(['Ciclos.status_id' => 1]);
+                                                    });
+        $this->set('tanques',$tanques);
+        $this->set('_serialize',['tanques']);
+    }
+
     public function index()
     {
         $this->paginate = [
@@ -40,7 +49,7 @@ class TanquesController extends AppController
     public function view($id = null)
     {
         $tanque = $this->Tanques->get($id, [
-            'contain' => ['Coberturas', 'Propriedades', 'Ciclos']
+            'contain' => ['Coberturas', 'Propriedades' => ['Usuarios'], 'Ciclos' => ['Status']]
         ]);
         $this->set('tanque', $tanque);
         $this->set('_serialize', ['tanque']);
@@ -63,9 +72,9 @@ class TanquesController extends AppController
                 $this->Flash->error(__('The tanque could not be saved. Please, try again.'));
             }
         }
-        $coberturas = $this->Tanques->Coberturas->find('list', ['limit' => 200]);
-        $propriedades = $this->Tanques->Propriedades->find('list', ['limit' => 200]);
-        $this->set(compact('tanque', 'coberturas', 'propriedades'));
+        $coberturas = $this->Tanques->Coberturas->find('list');
+        $usuarios = $this->Tanques->Propriedades->Usuarios->find('list');
+        $this->set(compact('tanque', 'coberturas', 'usuarios'));
         $this->set('_serialize', ['tanque']);
     }
 
