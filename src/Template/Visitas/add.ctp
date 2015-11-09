@@ -99,7 +99,7 @@
                                 <?=  $this->Form->input('tanque_id', ['options' => [null => 'Selecione uma propriedade'], 'class' => 'form-control']); ?>
                             </div>
                             <div class="form-group">
-                                <?=  $this->Form->input('ciclo_id', ['options' => [null => 'Escolha um tanque'], 'class' => 'form-control', 'disabled' => true]); ?>
+                                <?=  $this->Form->input('ciclo_id', ['options' => [null => 'Escolha um tanque'], 'class' => 'form-control']); ?>
                             </div>
                             <div class="form-group">
                                 <?=  $this->Form->input('oxigenio_agua', ['class' => 'form-control', 'label' => 'Nível de Oxigenação da Água']); ?>
@@ -188,28 +188,11 @@
     }
 
     function duplicatePesoOnTab(e,elt){
-        alert(elt);
         var code = e.keyCode || e.which;
         if(code === 9){
             duplicatePesoInput();
         }
     }
-
-    $("select[name='tanque_id']").change(function(){
-        $.ajax({
-            url: "<?= $this->Url->build(['controller' => 'Ciclos','action' => 'getAtivosByTanque'])?>"+"/"+this.value+".json",
-            success: function(data){
-                $("select[name='ciclo_id']").empty();
-                $.each(data.ciclos, function(k,v){
-                    console.log(v.id, v.nome);
-                    $("select[name='ciclo_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
-                })
-            },
-            error: function(e){
-                console.log("Erro: "+e);
-            }
-        });
-    });
 
     //pega propriedades por usuario
     $("select[name='usuario_id']").change(function(){
@@ -237,6 +220,23 @@
                 $("select[name='tanque_id']").append("<option value='"+null+"'>Selecione uma tanque</option>");
                 $.each(data.tanques, function(k,v){
                     $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                })
+            },
+            error: function(e){
+                console.log("Erro: "+e);
+            }
+        });
+    });
+
+    //pega o ciclo ativo do tanque
+    $("select[name='tanque_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Ciclos','action' => 'getAtivosByTanque'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='ciclo_id']").empty();
+                $.each(data.ciclos, function(k,v){
+                    console.log(v.id, v.nome);
+                    $("select[name='ciclo_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
                 })
             },
             error: function(e){

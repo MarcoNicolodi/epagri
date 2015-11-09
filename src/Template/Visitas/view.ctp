@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <th><?= __('Data') ?></th>
-                        <td><?= h($visita->data) ?></tr>
+                        <td><?= $this->Time->format($visita->data,'dd/MM/yyyy'); ?></tr>
                     </tr>
                 </table>
             </div>

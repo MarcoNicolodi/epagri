@@ -6,6 +6,12 @@ use Cake\Event\Event;
 
 class UsuariosController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow('add');
+    }
+
     public function index()
     {
         $this->paginate = [
@@ -38,7 +44,6 @@ class UsuariosController extends AppController
                 $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar o usuário. Por favor, tente novamente.'));
             }
         }
-        $estados = $this->Usuarios->Cidades->Estados->find('list', ['limit' => 200]);
         $this->set(compact('usuario', 'estados', 'autorizacao'));
         $this->set('_serialize', ['usuario']);
     }
@@ -57,8 +62,9 @@ class UsuariosController extends AppController
                 $this->Flash->error(__('Ocorreu um problema ao tentar atualizar o usuário. Por favor, tente novamente.'));
             }
         }
-        $cidades = $this->Usuarios->Cidades->find('list', ['limit' => 200]);
-        $this->set(compact('usuario', 'cidades'));
+        $autorizacao = ['admin' => 'Administrador', 'epagri' => 'Epagri', 'produtor' => 'Produtor'];
+        $estados = $this->Usuarios->Cidades->Estados->find('list');
+        $this->set(compact('usuario', 'estados', 'autorizacao'));
         $this->set('_serialize', ['usuario']);
     }
 
@@ -76,7 +82,13 @@ class UsuariosController extends AppController
 
     public function login()
     {
+        if($this->Auth->user()){
+            $this->Flash->error("Você já está logado.");
+            return $this->redirect(['action' => 'index']);
+        }
+
         $this->viewBuilder()->layout('login');
+
         if($this->request->is('post')){
             $user = $this->Auth->identify();
             if($user){
@@ -90,6 +102,11 @@ class UsuariosController extends AppController
 
     public function logout()
     {
-
+        if(!$this->Auth->user()){
+            $this->Flash->error("Você não está logado.");
+            return $this->redirect($this->Auth->logout());
+        }
+        return $this->redirect($this->Auth->logout());
     }
+
 }

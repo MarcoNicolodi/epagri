@@ -15,6 +15,7 @@
                           </div>
                           <?= $this->Form->button('Entrar',['class' => 'btn btn-lg btn-primary btn-block']) ?>
                       </fieldset>
+                      <p> Não possui uma conta? <?= $this->Html->link('Clique aqui para se cadastrar',['controller' => 'Usuarios', 'action' => 'add']); ?> </p>
                   </form>
               </div>
           </div>

@@ -9,7 +9,7 @@ class CiclosController extends AppController
     //método sem view para usar com ajax
     public function getAtivosByTanque($tanque_id)
     {
-        $ciclos = $this->Ciclos->find('list')->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
+        $ciclos = $this->Ciclos->find()->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
         $this->set('ciclos',$ciclos);
         $this->set('_serialize',['ciclos']);
     }
@@ -26,7 +26,7 @@ class CiclosController extends AppController
     public function view($id = null)
     {
         $ciclo = $this->Ciclos->get($id, [
-            'contain' => ['Tanques', 'Status', 'EspeciesCategoriasCultivos', 'Visitas']
+            'contain' => ['Tanques', 'Status', 'EspeciesCategoriasCultivos', 'Visitas' => ['Notificacoes']]
         ]);
         $this->set('ciclo', $ciclo);
         $this->set('_serialize', ['ciclo']);

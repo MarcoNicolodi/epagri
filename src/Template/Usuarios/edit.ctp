@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <?= $this->Form->input('autorizacao', ['class' => 'form-control', 'label' => 'Autorização']); ?>
+                            <?= $this->Form->input('autorizacao', ['options' => $autorizacao, 'class' => 'form-control', 'label' => 'Autorização']); ?>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <?= $this->Form->input('estado_id', ['options' => [], 'class' => 'form-control', 'empty' => true]); ?>
+                            <?= $this->Form->input('estado_id', ['options' => $estados, 'class' => 'form-control', 'empty' => true]); ?>
                         </div>
                     </div>
                     <div class="col-md-6">
