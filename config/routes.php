@@ -42,7 +42,7 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
-
+    
 
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -55,7 +55,7 @@ Router::scope('/', function ($routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
 
-    
+
     $routes->extensions(['json']);
 
 

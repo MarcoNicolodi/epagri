@@ -42,25 +42,27 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
 
 </head>
 <body>
-
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<?= $this->Url->build('/')?>">PJsis ALFA</a>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    </button>
+                    <a class="navbar-brand" href="<?= $this->Url->build('/')?>">PJsis ALFA</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <!-- /.navbar-top-links -->
+
+
+            </nav>
+            <div class="whitebg">
+                <div class="row center">
+                    <?= $this->Flash->render() ?>
+                    <section class="container-fluid">
+                        <?= $this->fetch('content') ?>
+                    </section>
+                </div>
             </div>
-        </nav>
-        <div class="whitebg ruralbg">
-            <?= $this->Flash->render() ?>
-            <section class="container-fluid">
-                <?= $this->fetch('content') ?>
-            </section>
-        </div>
     </div>
     <?= $this->Html->script('jquery.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>

@@ -8,5 +8,4 @@ Instruções:
 	- O mod_rewrite do apache esteja instalado e ativo
 	- As permissoes do mod_rewrite sejam Allow from All
 	- O seu php tenha as extensões Intl, PDO e Mcrypt instaladas
-- Acesse a url seuservidor/epagri/usuarios/add para criar um usuario ou logue no sistema com as credenciais 123@123.com e senha 123
-
+- Acesse a url seuservidor/epagri/usuarios/add para criar um usuario ou logue no sistema com as credenciais adriano@email.com e senha 123

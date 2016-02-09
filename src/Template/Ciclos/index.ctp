@@ -27,10 +27,10 @@
                         <?php foreach ($ciclos as $ciclo): ?>
                         <tr>
                             <td><?= $this->Number->format($ciclo->id) ?></td>
-                            <td><?= $ciclo->has('tanque') ? $this->Html->link($ciclo->tanque->id, ['controller' => 'Tanques', 'action' => 'view', $ciclo->tanque->id]) : '' ?></td>
+                            <td><?= $ciclo->has('tanque') ? $this->Html->link($ciclo->tanque->nome, ['controller' => 'Tanques', 'action' => 'view', $ciclo->tanque->id]) : '' ?></td>
                             <td><?= h($ciclo->data_inicio) ?></td>
                             <td><?= $this->Number->format($ciclo->povoamento_inicio) ?></td>
-                            <td><?= $ciclo->has('status') ? $this->Html->link($ciclo->status->id, ['controller' => 'Status', 'action' => 'view', $ciclo->status->id]) : '' ?></td>
+                            <td><?= $ciclo->has('status') ? $this->Html->link($ciclo->status->nome, ['controller' => 'Status', 'action' => 'view', $ciclo->status->id]) : '' ?></td>
                             <td><?= h($ciclo->data_fim) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $ciclo->id]) ?>

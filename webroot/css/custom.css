@@ -46,6 +46,44 @@ a i.fa-white {
     color:white;
 }
 
-#login-wrapper {
+.whitebg {
     background-color: white;
 }
+
+.center {
+    margin:auto;
+    width: 50%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* codigo para tela do login(background img com blur) */
+
+.blurred-ruralbg {
+  overflow: auto;
+  position: relative;
+}
+
+.blurred-ruralbg:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+
+
+  display: block;
+  background-image: url('../img/ruralbg.jpg');
+  background-size:cover;
+  width: 100%;
+  height: 794px;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+/* fim codigo tela do login */

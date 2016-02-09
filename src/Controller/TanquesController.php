@@ -9,9 +9,10 @@ class TanquesController extends AppController
     //retorna tanque sque nao estao participando de ciclos
     public function getInativosByPropriedade($propriedade_id)
     {
-        $tanques = $this->Tanques->find('list')->matching('Ciclos', function ($q) {
-                                                        return $q->where(['Ciclos.status_id' => 2]);
+        $tanques = $this->Tanques->find()->where(['propriedade_id' => $propriedade_id])->notMatching('Ciclos', function ($q) {
+                                                        return $q->where(['Ciclos.status_id' => 1]);
                                                     });
+
         $this->set('tanques',$tanques);
         $this->set('_serialize',['tanques']);
     }

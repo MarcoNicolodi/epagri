@@ -51,24 +51,28 @@
                 <table class="table table-striped">
                     <tr>
 
-                        <th><?= __('Ciclo Id') ?></th>
-                        <th><?= __('Oxigenio') ?></th>
-                        <th><?= __('Ionizacao') ?></th>
-                        <th><?= __('Temperatura') ?></th>
-                        <th><?= __('Largura') ?></th>
-                        <th><?= __('Peso') ?></th>
-                        <th><?= __('Data') ?></th>
-                        <th><?= __('Ações') ?></th>
+                        <th>Ciclo</th>
+                        <th>Data</th>
+                        <th>Oxigenio</th>
+                        <th>Ionizacao</th>
+                        <th>Temperatura</th>
+                        <th>Largura</th>
+                        <th>Peso</th>
+                        <th>Alimentação</th>
+                        <th>Aeradores</th>
+                        <th>Ações</th>
                     </tr>
                     <?php foreach ($ciclo->visitas as $visitas): ?>
                     <tr>
                         <td><?= h($visitas->ciclo_id) ?></td>
+                        <td><?= $this->Time->format(h($visitas->data),'dd/MM/yyyy') ?></td>
                         <td><?= h($visitas->oxigenio_agua) ?></td>
                         <td><?= h($visitas->ionizacao_agua) ?></td>
                         <td><?= h($visitas->temperatura_agua) ?></td>
                         <td><?= h($visitas->largura_peixes) ?></td>
                         <td><?= h($visitas->peso_peixes) ?></td>
-                        <td><?= $this->Time->format(h($visitas->data),'dd/MM/yyyy') ?></td>
+                        <td>Alimentação</td>
+                        <td>Aeradores</td>
                         <td>
                             <?= $this->Html->link(__('View'), ['controller' => 'Visitas', 'action' => 'view', $visitas->id]) ?>
 

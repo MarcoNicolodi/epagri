@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row blurred-ruralbg">
       <div class="col-md-4 col-md-offset-4">
           <div class="login-panel panel panel-green">
               <div class="panel-heading">
@@ -15,7 +15,9 @@
                           </div>
                           <?= $this->Form->button('Entrar',['class' => 'btn btn-lg btn-primary btn-block']) ?>
                       </fieldset>
-                      <p> Não possui uma conta? <?= $this->Html->link('Clique aqui para se cadastrar',['controller' => 'Usuarios', 'action' => 'add']); ?> </p>
+                      <div>
+                          <p class="center-text"> Não possui uma conta? <?= $this->Html->link('Clique aqui para se cadastrar',['controller' => 'Usuarios', 'action' => 'add']); ?> </p>
+                      </div>
                   </form>
               </div>
           </div>

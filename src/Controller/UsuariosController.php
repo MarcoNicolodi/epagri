@@ -15,7 +15,7 @@ class UsuariosController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Cidades']
+            'contain' => ['Cidades' => ['Estados']]
         ];
         $this->set('usuarios', $this->paginate($this->Usuarios));
         $this->set('_serialize', ['usuarios']);
@@ -32,13 +32,22 @@ class UsuariosController extends AppController
 
     public function add()
     {
+        if(!$this->Auth->user()){
+            $this->viewBuilder()->layout('defaultNotLoggedIn');
+            $autorizacao = ['produtor' => 'Produtor'];
+        } else {
+            $autorizacao = ['admin' => 'Administrador', 'epagri' => 'Epagri', 'produtor' => 'Produtor'];
+        }
         $usuario = $this->Usuarios->newEntity();
         $estados = $this->Usuarios->Cidades->Estados->find('list');
-        $autorizacao = ['admin' => 'Administrador', 'epagri' => 'Epagri', 'produtor' => 'Produtor'];
         if ($this->request->is('post')) {
             $usuario = $this->Usuarios->patchEntity($usuario, $this->request->data);
             if ($this->Usuarios->save($usuario)) {
                 $this->Flash->success(__('Usuário cadastrado com sucesso.'));
+                //logar usuario se nao nenhum user logado;
+                if(!$this->Auth->user()){
+                    $this->Auth->setUser($usuario->toArray());
+                }
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar o usuário. Por favor, tente novamente.'));

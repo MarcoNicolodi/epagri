@@ -23,10 +23,10 @@
                     <tbody>
                         <?php foreach ($usuarios as $usuario): ?>
                         <tr>
-                            <td><?= h($usuario->username) ?></td>
+                            <td><?= $this->Html->link($usuario->username, ['action' => 'view',$usuario->id_usuario]); ?></td>
                             <td><?= h($usuario->email) ?></td>
                             <td><?= h($usuario->endereco) ?></td>
-                            <td><?= $usuario->has('cidade') ? $this->Html->link($usuario->cidade->id, ['controller' => 'Cidades', 'action' => 'view', $usuario->cidade->id]) : '' ?></td>
+                            <td><?= $usuario->has('cidade') ?  $usuario->cidade->nome.', '.$usuario->cidade->estado->uf : '' ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $usuario->id_usuario]) ?>
                                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $usuario->id_usuario]) ?>

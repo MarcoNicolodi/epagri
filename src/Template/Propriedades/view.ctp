@@ -3,7 +3,7 @@
         <h2 class="page-header"> Propriedade <small><?= $propriedade->nome ?></small> </h2>
     </div>
 </div>
-<div class="row">
+<!--<div class="row">
     <div class="col-md-12">
         <div class="panel panel-green">
             <div class="panel-heading">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <div class="row">
         <div class="col-md-6">
             <div class="panel panel-green">
@@ -119,7 +119,7 @@
                     <h3 class="panel-title">Ciclos</h3>
                 </div>
                 <div class="panel-body">
-                    <?php if(!empty($propriedade->tanques->ciclos)){  ?>
+                    <?php if(!empty($propriedade->tanques)){  ?>
                     <table class="table table-striped">
                         <tr>
                             <th> Nome </th>
@@ -128,15 +128,17 @@
                             <th> Início </th>
                             <th> Término </th>
                         </tr>
-                        <?php foreach($propriedade->tanques->ciclos as $c): ?>
+                        <?php foreach($propriedade->tanques as $t):
+                                foreach($t->ciclos as $c):
+                             ?>
                         <tr>
                             <td> <?= h($c->nome) ?> </td>
-                            <td> <?= h($c->nome) ?> </td>
-                            <td> <?= h($c->nome) ?> </td>
-                            <td> <?= h($c->nome) ?> </td>
-                            <td> <?= h($c->nome) ?> </td>
+                            <td> <?= h($t->nome) ?> </td>
+                            <td> <?= h($c->status->nome) ?> </td>
+                            <td> <?= h($c->data_inicio) ?> </td>
+                            <td> <?= h($c->data_fim) ?> </td>
                         </tr>
-                    <?php endforeach ?>
+                    <?php endforeach; endforeach; ?>
                     </table>
                     <?php } else {
                         echo "Esta propriedade não está participando de nenhum ciclo.";

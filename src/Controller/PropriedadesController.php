@@ -2,9 +2,17 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+
 
 class PropriedadesController extends AppController
 {
+    // public function beforeRender(Event $e)
+    // {
+    //     $this->eventManager()->off($this->Csrf);
+    //     $this->response->header('Access-Control-Allow-Origin', '*');
+    // }
+
     //método sem view para usar com AJAX
     public function getByUsuario($usuario_id)
     {
@@ -25,7 +33,7 @@ class PropriedadesController extends AppController
     public function view($id = null)
     {
         $propriedade = $this->Propriedades->get($id, [
-            'contain' => ['Usuarios', 'Cidades' => ['Estados'], 'Tanques' => ['Ciclos']]
+            'contain' => ['Usuarios', 'Cidades' => ['Estados'], 'Tanques' => ['Ciclos' => ['Status']]]
         ]);
         $this->set('propriedade', $propriedade);
         $this->set('_serialize', ['propriedade']);
@@ -33,16 +41,23 @@ class PropriedadesController extends AppController
 
     public function add()
     {
+        $this->response->header('Access-Control-Allow-Origin', '*');
         $propriedade = $this->Propriedades->newEntity();
         if ($this->request->is('post')) {
             $propriedade = $this->Propriedades->patchEntity($propriedade, $this->request->data);
             if ($this->Propriedades->save($propriedade)) {
+                if($this->request->is('ajax') || $this->request->is('json')){
+                    echo json_encode($propriedade);
+                    exit();
+                }
                 $this->Flash->success(__('Propriedade cadastrada com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar a propriedade. Por favor, tente novamente.'));
             }
         }
+
+
         $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200]);
         $estados = $this->Propriedades->Cidades->Estados->find('list', ['limit' => 200]);
         $this->set(compact('propriedade', 'usuarios', 'estados'));

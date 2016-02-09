@@ -48,7 +48,7 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-    <?= $this->Html->link(__('Cadastrar'), ['controller' => 'Propriedades', 'action' => 'add'], ['class'=> 'btn btn-lg btn-primary']) ?>
+    <?= $this->Html->link(__('Cadastrar'), ['controller' => 'Propriedades', 'action' => 'add'], ['class'=> 'btn btn-lg btn-default']) ?>
     <div>
 </div>
 </div>
