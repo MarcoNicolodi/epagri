@@ -99,7 +99,8 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
                                 <a href="#"><i class="fa fa-pagelines fa-fw"></i> Propriedades<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
-                                        <?= $this->Html->link("Gerenciar", ["controller" => "Propriedades","action" => "index"]); ?>
+                                        <!-- link criado sem o helper, pois como propriedades eh root do sistema, fica com a class active sempre(bug) -->
+                                        <?= "<a href='http://{$_SERVER['SERVER_NAME']}/epagri3/propriedades'>Gerenciar</a>"//$this->Html->link("Gerenciar", ["controller" => "Propriedades","action" => "index"]); ?>
                                     </li>
                                     <li>
                                         <?= $this->Html->link('Cadastrar', ["controller" => "Propriedades","action" => "add"]); ?>
@@ -166,6 +167,7 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
             </nav>
             <div id="page-wrapper">
                 <?= $this->Flash->render() ?>
+                <?= $this->Flash->render('auth') ?>
 
 
         <section class="container-fluid">

@@ -13,6 +13,12 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
+              'authorize' => 'Controller',
+              'unauthorizedRedirect' => ['controller' => 'propriedades','action' => 'index'],
+              'authError' => 'Você não está autorizado a acessar esse conteúdo',
+              'flash' => [
+                  'element' => 'error'
+              ],
               'authenticate' => [
                   'Form' => [
                       'userModel' => 'Usuarios',
@@ -28,6 +34,13 @@ class AppController extends Controller
               ]
         ]);
 
+    }
+
+    public function isAuthorized($user = null)
+    {
+        if($user['autorizacao'] === 'admin' || $user['autorizacao'] === 'epagri'){
+            return true;
+        }
     }
 
     public function beforeRender(Event $event)

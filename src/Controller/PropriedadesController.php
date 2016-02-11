@@ -11,7 +11,33 @@ class PropriedadesController extends AppController
     // {
     //     $this->eventManager()->off($this->Csrf);
     //     $this->response->header('Access-Control-Allow-Origin', '*');
-    // }
+    // }s
+
+    //TODO arrumar autorizacao para metodos ajax
+    public function isAuthorized($user = null)
+    {
+        parent::isAuthorized($this->Auth->user());
+
+        if($this->request->params['action'] == 'index'){
+            return true;
+        }
+
+        if($this->request->params['action'] == 'getByUsuario'){
+            if($this->request->params['pass'][0] == $this->Auth->user('id_usuario'))
+                return true;
+
+            return false;
+        }
+
+        if($this->Propriedades->find('propOwner',[
+            'id' => $this->request->params['pass'][0],
+            'id_usuario' => $this->Auth->user('id_usuario')
+            ])){
+            return true;
+        }
+
+        return false
+    }
 
     //método sem view para usar com AJAX
     public function getByUsuario($usuario_id)
@@ -26,7 +52,12 @@ class PropriedadesController extends AppController
         $this->paginate = [
             'contain' => ['Usuarios', 'Cidades']
         ];
-        $this->set('propriedades', $this->paginate($this->Propriedades));
+
+        if($this->Auth->user('autorizacao') == 'produtor'){
+            $this->set('propriedades', $this->paginate($this->Propriedades->find('all')->where(['id_usuario' => $this->Auth->user('id_usuario')])));
+        } else {
+            $this->set('propriedades', $this->paginate($this->Propriedades));
+        }
         $this->set('_serialize', ['propriedades']);
     }
 
@@ -58,7 +89,7 @@ class PropriedadesController extends AppController
         }
 
 
-        $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200]);
+        $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200,'order' => 'username']);
         $estados = $this->Propriedades->Cidades->Estados->find('list', ['limit' => 200]);
         $this->set(compact('propriedade', 'usuarios', 'estados'));
         $this->set('_serialize', ['propriedade']);

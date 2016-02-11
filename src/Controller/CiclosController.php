@@ -6,6 +6,17 @@ use App\Controller\AppController;
 class CiclosController extends AppController
 {
 
+    public function isAuthorized($user = null)
+    {
+        parent::isAuthorized($this->Auth->user());
+
+        if($this->request->action == 'index'){
+            return true;
+        }
+
+        return $check = $this->
+    }
+
     //método sem view para usar com ajax
     public function getAtivosByTanque($tanque_id)
     {

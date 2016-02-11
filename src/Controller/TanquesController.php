@@ -5,8 +5,26 @@ use App\Controller\AppController;
 
 class TanquesController extends AppController
 {
+
+    //TODO arrumar autorizacao para metodos ajax
+    public function isAuthorized($user = null)
+    {
+        parent::isAuthorized($this->Auth->user());
+
+        if($this->request->params['action'] == 'index'){
+            return true;
+        }
+
+        //checa se o tanque passado por parametro pertence a uma propriedade do usuario logado
+        return $check = $this->Tanques->find()->where(['Tanques.id' => $this->request->params['pass'][0]])->matching('Propriedades',function($q){
+                                                                                        return $q->where(['Propriedades.usuario_id' => $this->Auth->user('id_usuario')]);
+                                                                                    })->count() > 0;
+
+
+    }
+
     //método sem view para usar com AJAX
-    //retorna tanque sque nao estao participando de ciclos
+    //retorna tanques que nao estao participando de ciclos
     public function getInativosByPropriedade($propriedade_id)
     {
         $tanques = $this->Tanques->find()->where(['propriedade_id' => $propriedade_id])->notMatching('Ciclos', function ($q) {
@@ -31,7 +49,14 @@ class TanquesController extends AppController
         $this->paginate = [
             'contain' => ['Coberturas', 'Propriedades']
         ];
-        $this->set('tanques', $this->paginate($this->Tanques));
+
+        if($this->Auth->user('autorizacao') == 'admin' || $this->Auth->user('autorizacao') == 'epagri'){
+            $this->set('tanques', $this->paginate($this->Tanques));
+        } else {
+            $this->set('tanques', $this->paginate($this->Tanques->find()->matching('Propriedades',function($q){
+                                                                                        return $q->where(['Propriedades.usuario_id' => $this->Auth->user('id_usuario')]);
+                                                                                    })));
+        }
         $this->set('_serialize', ['tanques']);
     }
 
@@ -56,8 +81,8 @@ class TanquesController extends AppController
                 $this->Flash->error(__('Ocorreu um problema ao tentar cadastrar o tanque. Por favor, tente novamente.'));
             }
         }
-        $coberturas = $this->Tanques->Coberturas->find('list');
-        $usuarios = $this->Tanques->Propriedades->Usuarios->find('list');
+        $coberturas = $this->Tanques->Coberturas->find('list',['order' => 'nome']);
+        $usuarios = $this->Tanques->Propriedades->Usuarios->find('list', ['order' => 'username']);
         $this->set(compact('tanque', 'coberturas', 'usuarios'));
         $this->set('_serialize', ['tanque']);
     }

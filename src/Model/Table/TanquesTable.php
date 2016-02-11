@@ -41,12 +41,12 @@ class TanquesTable extends Table
 
         $validator
             ->requirePresence('nome')
-            ->allowEmpty('nome');
+            ->notEmpty('nome');
 
         $validator
-            ->add('propriedade_id','valid',['rule' => 'numeric'])
             ->requirePresence('propriedade_id')
-            ->notEmpty('propriedade_id');
+            ->notEmpty('propriedade_id')
+            ->add('propriedade_id','valid',['rule' => 'numeric']);
 
         return $validator;
     }

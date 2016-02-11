@@ -57,4 +57,10 @@ class PropriedadesTable extends Table
         $rules->add($rules->existsIn(['cidade_id'], 'Cidades'));
         return $rules;
     }
+
+    public function findPropOwner(Query $q, $options)
+    {
+        return $q->where(['usuario_id' => $options['id_usuario'],
+                      'id' => $options['id']])->count() != 0;
+    }
 }

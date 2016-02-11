@@ -309,7 +309,7 @@ table.dataTable thead .sorting:after {
     background-color: #5cb85c;
 }
 
-.panel-green a {
+.panel-green a:not(a) {
     color: #5cb85c;
 }
 

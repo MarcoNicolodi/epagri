@@ -35,16 +35,22 @@
 <?php $this->start('script'); ?>
 <?= $this->fetch('script'); ?>
 <script type="text/javascript">
+    $("select[name='usuario_id']").prepend("<option value'"+null+"' selected>Selecione um produtor</option>");
+
     //pega propriedades por usuario
     $("select[name='usuario_id']").change(function(){
         $.ajax({
             url: "<?= $this->Url->build(['controller' => 'Propriedades','action' => 'getByUsuario'])?>"+"/"+this.value+".json",
             success: function(data){
                 $("select[name='propriedade_id']").empty();
-                $("select[name='propriedade_id']").append("<option value='"+null+"'>Selecione uma Propriedade</option>");
-                $.each(data.propriedades, function(k,v){
-                    $("select[name='propriedade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
-                });
+                if(data.propriedades.length == 0){
+                    $("select[name='propriedade_id']").append("<option value='"+null+"'>Nenhuma propriedade encontrada</option>");
+                } else {
+                    $("select[name='propriedade_id']").append("<option value='"+null+"'>Selecione uma Propriedade</option>");
+                    $.each(data.propriedades, function(k,v){
+                        $("select[name='propriedade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                    });
+                }
             },
             error: function(e){
                 console.log("Erro: "+e);

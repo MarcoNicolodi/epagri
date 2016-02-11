@@ -12,6 +12,21 @@ class UsuariosController extends AppController
         $this->Auth->allow('add');
     }
 
+    public function isAuthorized($user = null)
+    {
+        parent::isAuthorized($this->Auth->user());
+
+        if($this->request->action == 'index'){
+            return true;
+        }
+
+        if($this->request->params['pass'][0] == $this->Auth->user('id_usuario')){
+            return true;
+        }
+
+        return false;
+    }
+
     public function index()
     {
         $this->paginate = [
