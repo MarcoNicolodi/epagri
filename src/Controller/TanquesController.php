@@ -9,18 +9,15 @@ class TanquesController extends AppController
     //TODO arrumar autorizacao para metodos ajax
     public function isAuthorized($user = null)
     {
-        parent::isAuthorized($this->Auth->user());
+        if(parent::isAuthorized($this->Auth->user()))
+            return true;
 
         if($this->request->params['action'] == 'index'){
             return true;
         }
 
         //checa se o tanque passado por parametro pertence a uma propriedade do usuario logado
-        return $check = $this->Tanques->find()->where(['Tanques.id' => $this->request->params['pass'][0]])->matching('Propriedades',function($q){
-                                                                                        return $q->where(['Propriedades.usuario_id' => $this->Auth->user('id_usuario')]);
-                                                                                    })->count() > 0;
-
-
+        return $this->Tanques->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario');
     }
 
     //método sem view para usar com AJAX

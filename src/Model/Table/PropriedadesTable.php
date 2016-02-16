@@ -58,9 +58,9 @@ class PropriedadesTable extends Table
         return $rules;
     }
 
-    public function findPropOwner(Query $q, $options)
+    public function getOwner($id)
     {
-        return $q->where(['usuario_id' => $options['id_usuario'],
-                      'id' => $options['id']])->count() != 0;
+        $q = $this->find('all')->where(['Propriedades.id' => $id])->contain('Usuarios')->first();
+        return $q->usuario->id_usuario;
     }
 }

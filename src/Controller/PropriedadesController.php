@@ -7,18 +7,12 @@ use Cake\Event\Event;
 
 class PropriedadesController extends AppController
 {
-    // public function beforeRender(Event $e)
-    // {
-    //     $this->eventManager()->off($this->Csrf);
-    //     $this->response->header('Access-Control-Allow-Origin', '*');
-    // }s
-
-    //TODO arrumar autorizacao para metodos ajax
     public function isAuthorized($user = null)
     {
-        parent::isAuthorized($this->Auth->user());
+        if(parent::isAuthorized($this->Auth->user()))
+            return true;
 
-        if($this->request->params['action'] == 'index'){
+        if($this->request->params['action'] == 'index' || $this->request->params['action'] == 'add'){
             return true;
         }
 
@@ -29,14 +23,7 @@ class PropriedadesController extends AppController
             return false;
         }
 
-        if($this->Propriedades->find('propOwner',[
-            'id' => $this->request->params['pass'][0],
-            'id_usuario' => $this->Auth->user('id_usuario')
-            ])){
-            return true;
-        }
-
-        return false
+        return $this->Propriedades->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario');
     }
 
     //método sem view para usar com AJAX
@@ -72,11 +59,11 @@ class PropriedadesController extends AppController
 
     public function add()
     {
-        $this->response->header('Access-Control-Allow-Origin', '*');
         $propriedade = $this->Propriedades->newEntity();
         if ($this->request->is('post')) {
             $propriedade = $this->Propriedades->patchEntity($propriedade, $this->request->data);
             if ($this->Propriedades->save($propriedade)) {
+                //testando meu app phonegap
                 if($this->request->is('ajax') || $this->request->is('json')){
                     echo json_encode($propriedade);
                     exit();

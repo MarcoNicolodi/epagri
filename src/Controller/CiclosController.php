@@ -10,11 +10,14 @@ class CiclosController extends AppController
     {
         parent::isAuthorized($this->Auth->user());
 
-        if($this->request->action == 'index'){
+        if($this->request->action == 'index' || $this->request->action == 'add'){
             return true;
         }
 
-        return $check = $this->
+        if($this->Ciclos->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario'))
+            return true;
+
+        return false;
     }
 
     //método sem view para usar com ajax

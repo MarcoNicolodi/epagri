@@ -14,7 +14,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
               'authorize' => 'Controller',
-              'unauthorizedRedirect' => ['controller' => 'propriedades','action' => 'index'],
+              'unauthorizedRedirect' => $this->referer(),
               'authError' => 'Você não está autorizado a acessar esse conteúdo',
               'flash' => [
                   'element' => 'error'

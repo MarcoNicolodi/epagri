@@ -27,9 +27,9 @@
                     <td><?= $this->Number->format($tanque->capacidade) ?></td>
                     <td><?= $tanque->has('propriedade') ? $this->Html->link($tanque->propriedade->nome, ['controller' => 'Propriedades', 'action' => 'view', $tanque->propriedade->id]) : '' ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $tanque->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $tanque->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $tanque->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tanque->id)]) ?>
+                        <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $tanque->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
+                        <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $tanque->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Editar']) ?>
+                        <?= $this->Form->postLink('<i class="fa fa-times fa-white"></i>', ['action' => 'delete', $tanque->id], ['class' =>'btn btn-danger btn-sm', 'escape' => false, 'title' => 'Excluir', 'confirm' =>'Tem certeza que deseja apagar o tanque {0}?', $tanque->nome]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -37,9 +37,9 @@
         </table>
         <div class="paginator">
             <ul class="pagination">
-                <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                <?= $this->Paginator->prev('< ' . __('Próximo')) ?>
                 <?= $this->Paginator->numbers() ?>
-                <?= $this->Paginator->next(__('next') . ' >') ?>
+                <?= $this->Paginator->next(__('Anterior') . ' >') ?>
             </ul>
             <p><?= $this->Paginator->counter() ?></p>
         </div>

@@ -9,12 +9,13 @@ class UsuariosController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow('add');
+        $this->Auth->allow(['add','login','logout']);
     }
 
     public function isAuthorized($user = null)
     {
-        parent::isAuthorized($this->Auth->user());
+        if(parent::isAuthorized($this->Auth->user()));
+            return true;
 
         if($this->request->action == 'index'){
             return true;
@@ -32,7 +33,12 @@ class UsuariosController extends AppController
         $this->paginate = [
             'contain' => ['Cidades' => ['Estados']]
         ];
-        $this->set('usuarios', $this->paginate($this->Usuarios));
+
+        if($this->Auth->user('autorizacao') == 'produtor'){
+            $this->set('usuarios',$this->paginate($this->Usuarios->find('all')->where(['id_usuario' => $this->Auth->user('id_usuario')])));
+        } else {
+            $this->set('usuarios', $this->paginate($this->Usuarios));
+        }
         $this->set('_serialize', ['usuarios']);
     }
 

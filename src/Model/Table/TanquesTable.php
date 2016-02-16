@@ -57,4 +57,10 @@ class TanquesTable extends Table
         $rules->add($rules->existsIn(['propriedade_id'], 'Propriedades'));
         return $rules;
     }
+
+    public function getOwner($id)
+    {
+        $q = $this->find('all')->where(['Tanques.id' => $id])->contain(['Propriedades' => ['Usuarios']])->first();
+        return $q->propriedade->usuario->id_usuario;
+    }
 }

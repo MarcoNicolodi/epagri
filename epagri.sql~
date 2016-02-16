@@ -2,10 +2,10 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 15, 2016 at 06:18 PM
--- Server version: 5.5.47-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Servidor: localhost
+-- Tempo de Geração: 07/11/2015 às 22:42
+-- Versão do servidor: 5.5.46-0ubuntu0.14.04.2
+-- Versão do PHP: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `epagri`
+-- Banco de dados: `epagri`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorias_cultivos`
+-- Estrutura para tabela `categorias_cultivos`
 --
 
 CREATE TABLE IF NOT EXISTS `categorias_cultivos` (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `categorias_cultivos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciclos`
+-- Estrutura para tabela `ciclos`
 --
 
 CREATE TABLE IF NOT EXISTS `ciclos` (
@@ -50,23 +50,19 @@ CREATE TABLE IF NOT EXISTS `ciclos` (
   PRIMARY KEY (`id`),
   KEY `id_tanque_idx` (`tanque_id`),
   KEY `fk_ciclo_status1_idx` (`status_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=54 ;
 
 --
--- Dumping data for table `ciclos`
+-- Fazendo dump de dados para tabela `ciclos`
 --
 
 INSERT INTO `ciclos` (`id`, `tanque_id`, `data_inicio`, `povoamento_inicio`, `status_id`, `data_fim`, `nome`) VALUES
-(53, 10, '2015-10-10', 4000, 1, NULL, 'Ciclo 1'),
-(54, 8, '2165-02-01', 3000, 1, NULL, 'Ciclo 2'),
-(55, 12, '2178-11-06', 4000, 1, NULL, 'Ciclo 1'),
-(56, 14, '2178-11-03', 4000, 1, NULL, 'Ciclo do tanque azul'),
-(57, 13, '2178-11-03', 4000, 1, NULL, 'Ciclo de novembro');
+(53, 10, '2015-10-10', 4000, 1, NULL, 'Ciclo 1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cidades`
+-- Estrutura para tabela `cidades`
 --
 
 CREATE TABLE IF NOT EXISTS `cidades` (
@@ -78,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `cidades` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5566 ;
 
 --
--- Dumping data for table `cidades`
+-- Fazendo dump de dados para tabela `cidades`
 --
 
 INSERT INTO `cidades` (`id`, `nome`, `estado_id`) VALUES
@@ -5653,7 +5649,7 @@ INSERT INTO `cidades` (`id`, `nome`, `estado_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coberturas`
+-- Estrutura para tabela `coberturas`
 --
 
 CREATE TABLE IF NOT EXISTS `coberturas` (
@@ -5664,7 +5660,7 @@ CREATE TABLE IF NOT EXISTS `coberturas` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `coberturas`
+-- Fazendo dump de dados para tabela `coberturas`
 --
 
 INSERT INTO `coberturas` (`id`, `nome`, `descricao`) VALUES
@@ -5674,7 +5670,7 @@ INSERT INTO `coberturas` (`id`, `nome`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comentarios`
+-- Estrutura para tabela `comentarios`
 --
 
 CREATE TABLE IF NOT EXISTS `comentarios` (
@@ -5692,7 +5688,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entrada_produtos`
+-- Estrutura para tabela `entrada_produtos`
 --
 
 CREATE TABLE IF NOT EXISTS `entrada_produtos` (
@@ -5707,7 +5703,7 @@ CREATE TABLE IF NOT EXISTS `entrada_produtos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `especies`
+-- Estrutura para tabela `especies`
 --
 
 CREATE TABLE IF NOT EXISTS `especies` (
@@ -5720,7 +5716,7 @@ CREATE TABLE IF NOT EXISTS `especies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `especies_categorias_cultivos`
+-- Estrutura para tabela `especies_categorias_cultivos`
 --
 
 CREATE TABLE IF NOT EXISTS `especies_categorias_cultivos` (
@@ -5736,7 +5732,7 @@ CREATE TABLE IF NOT EXISTS `especies_categorias_cultivos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estados`
+-- Estrutura para tabela `estados`
 --
 
 CREATE TABLE IF NOT EXISTS `estados` (
@@ -5747,7 +5743,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
 
 --
--- Dumping data for table `estados`
+-- Fazendo dump de dados para tabela `estados`
 --
 
 INSERT INTO `estados` (`id`, `nome`, `uf`) VALUES
@@ -5782,7 +5778,7 @@ INSERT INTO `estados` (`id`, `nome`, `uf`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estoques`
+-- Estrutura para tabela `estoques`
 --
 
 CREATE TABLE IF NOT EXISTS `estoques` (
@@ -5798,7 +5794,7 @@ CREATE TABLE IF NOT EXISTS `estoques` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notificacoes`
+-- Estrutura para tabela `notificacoes`
 --
 
 CREATE TABLE IF NOT EXISTS `notificacoes` (
@@ -5810,10 +5806,10 @@ CREATE TABLE IF NOT EXISTS `notificacoes` (
   `alerta_aeradores` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_notificacoes_visitas1_idx` (`visita_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
--- Dumping data for table `notificacoes`
+-- Fazendo dump de dados para tabela `notificacoes`
 --
 
 INSERT INTO `notificacoes` (`id`, `visita_id`, `alimentacao`, `aeradores`, `alerta_alimentacao`, `alerta_aeradores`) VALUES
@@ -5822,19 +5818,12 @@ INSERT INTO `notificacoes` (`id`, `visita_id`, `alimentacao`, `aeradores`, `aler
 (10, 32, 'Alimentar os peixes com quantidade de ração equivalente a 1.2% da biomassa', 'Não é necessário ligar os aeradores', 'warning', 'success'),
 (11, 33, 'Alimentar os peixes com quantidade de ração equivalente a 2.4% da biomassa', 'Não é necessário ligar os aeradores', 'warning', 'success'),
 (12, 34, 'Alimentar os peixes com quantidade de ração equivalente a 2.4% da biomassa', 'Não é necessário ligar os aeradores', 'warning', 'success'),
-(13, 35, 'Alimentar os peixes com quantidade de ração equivalente a 2.4% da biomassa', 'Ligar aeradores', 'warning', 'warning'),
-(14, 36, 'Alimentar os peixes com quantidade de ração equivalente a 3% da biomassa', 'Não é necessário ligar os aeradores', 'success', 'success'),
-(15, 37, 'Alimentar os peixes com quantidade de ração equivalente a 2.4% da biomassa', 'Não é necessário ligar os aeradores', 'warning', 'success'),
-(16, 38, 'Não alimentar os peixes', 'Não é necessário ligar os aeradores', 'danger', 'success'),
-(17, 39, 'Não alimentar os peixes', 'Renovar água', 'danger', 'danger'),
-(18, 40, 'Não alimentar os peixes', 'Não é necessário ligar os aeradores', 'danger', 'success'),
-(19, 41, 'Não alimentar os peixes', 'Ligar aeradores', 'danger', 'warning'),
-(20, 42, 'Alimentar os peixes com quantidade de ração equivalente a 3% da biomassa', 'Não é necessário ligar os aeradores', 'success', 'success');
+(13, 35, 'Alimentar os peixes com quantidade de ração equivalente a 2.4% da biomassa', 'Ligar aeradores', 'warning', 'warning');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produtos`
+-- Estrutura para tabela `produtos`
 --
 
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -5846,7 +5835,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `propriedades`
+-- Estrutura para tabela `propriedades`
 --
 
 CREATE TABLE IF NOT EXISTS `propriedades` (
@@ -5860,23 +5849,20 @@ CREATE TABLE IF NOT EXISTS `propriedades` (
   PRIMARY KEY (`id`),
   KEY `id_cidade_idx` (`cidade_id`),
   KEY `id_proprietario_idx` (`usuario_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
--- Dumping data for table `propriedades`
+-- Fazendo dump de dados para tabela `propriedades`
 --
 
 INSERT INTO `propriedades` (`id`, `nome`, `tamanho`, `usuario_id`, `endereco`, `cidade_id`, `bairro`) VALUES
 (6, 'Chácara dos ventos', 4000, 7, 'Br 101, km 12', 1, 'Interior'),
-(7, 'Fazenda do Sol', 3000, 9, 'Sc 201, km 12', 25, 'Interior'),
-(8, 'Propriedade do Marco', 4000, 14, 'Rural', 4417, NULL),
-(9, 'Fazendo do Marco', 4000, 18, 'Rural', 3290, NULL),
-(10, 'Fazendo dos Leões', 2000, 7, 'Interior', 620, NULL);
+(7, 'Fazenda do Sol', 3000, 9, 'Sc 201, km 12', 25, 'Interior');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `saida_produtos`
+-- Estrutura para tabela `saida_produtos`
 --
 
 CREATE TABLE IF NOT EXISTS `saida_produtos` (
@@ -5891,7 +5877,7 @@ CREATE TABLE IF NOT EXISTS `saida_produtos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status`
+-- Estrutura para tabela `status`
 --
 
 CREATE TABLE IF NOT EXISTS `status` (
@@ -5902,7 +5888,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `status`
+-- Fazendo dump de dados para tabela `status`
 --
 
 INSERT INTO `status` (`id`, `nome`, `descricao`) VALUES
@@ -5912,7 +5898,7 @@ INSERT INTO `status` (`id`, `nome`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tanques`
+-- Estrutura para tabela `tanques`
 --
 
 CREATE TABLE IF NOT EXISTS `tanques` (
@@ -5924,26 +5910,22 @@ CREATE TABLE IF NOT EXISTS `tanques` (
   PRIMARY KEY (`id`),
   KEY `id_propriedade_idx` (`propriedade_id`),
   KEY `id_cobertura_idx` (`cobertura_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
 --
--- Dumping data for table `tanques`
+-- Fazendo dump de dados para tabela `tanques`
 --
 
 INSERT INTO `tanques` (`id`, `cobertura_id`, `capacidade`, `nome`, `propriedade_id`) VALUES
 (8, 1, 3000, 'Tanque dos fundos', 6),
 (9, 1, 3000, 'Tanque azul', 6),
 (10, 2, 4000, 'Tanque da frente', 6),
-(11, 1, 3000, 'Tanque do meio', 6),
-(12, 1, 4000, 'Tanque dos fundos', 8),
-(13, 1, 4000, 'Tanque do meio', 8),
-(14, 1, 40000, 'Tanque azul', 9),
-(15, 1, 100, 'postman', 6);
+(11, 1, 3000, 'Tanque do meio', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -5960,10 +5942,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `bairro` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `id_cidade_idx` (`cidade_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
--- Dumping data for table `usuarios`
+-- Fazendo dump de dados para tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`username`, `password`, `email`, `endereco`, `cidade_id`, `id_usuario`, `autorizacao`, `sobrenome`, `telefone1`, `telefone2`, `bairro`) VALUES
@@ -5972,18 +5954,12 @@ INSERT INTO `usuarios` (`username`, `password`, `email`, `endereco`, `cidade_id`
 ('Adriano', '$2y$10$EN2ZDubCX5k7prBUvOIon.6iKxVyym2VXW7bi9EH4SdDDsQLIe.TO', 'adriano@email.com', 'Rua Central, 12', 225, 10, 'epagri', 'Santos', '(48) 9988-3333', '(48) 8788-1213', 'Centro'),
 ('Fernanda', '$2y$10$GMduujvwEZQ.I.sJGfK3Q.NWrIRipvcRGEK.6cwlIYFvV0mz1OANa', 'fernanda@mattos.com', 'Rua dos Anjos, 13', 3161, 11, 'produtor', 'Mattos', '(44) 1212-4141', '(34) 8182-1233', 'Centro'),
 ('Vania', '$2y$10$/1vIFZ.IDqKNFuSy.V01RuKICT05X1DYHVcpYEzZY.3AY8AdFTdcy', 'vania@google.com', 'Avenida das Flores, 12', 2439, 12, 'produtor', 'Ferreira', '(48) 8888-1212', '(23) 8888-3333', 'Cidade Alta'),
-('Elisandro', '$2y$10$G3CnFMHI9WYpuuSvHBExZeuCZuNObwnBopUbK5FNUkKwoW6XVvm4y', 'elisandro@hotmail.com', 'Rua dos Macacos, 12', 804, 13, 'admin', 'Cunha', '(48) 1212-3333', '(12) 1233-1233', 'Trindade'),
-('Marco', '$2y$10$r.MQkH5Ck8gh8MiCR5PC4.gf6S5NW.Mh.9LTHZJUrbK7R7S6UX/jm', 'marconicolodi@marco.com', 'Rua 200', 4501, 14, 'admin', 'Nicolodi', '(48) 8888-2222', '', 'Centro'),
-('João', '$2y$10$4lAvHpfSREciOLFut56hM.7X6koSbsEX1tzkleSLPYxR7dh1Stia6', 'joao@carlos.com', 'Rua 200', 627, 15, 'produtor', 'Carlos', '(48) 8888-2222', '(48) 8788-1213', 'Centro'),
-('Ruan', '$2y$10$6UoAUvsExUbUDzurHf08NOe6YvGbNtGeu9gqVMgWQqDUHA35BLTMu', 'ruan@pedro.com', 'Rua dos Macacos, 12', 664, 16, 'produtor', 'Pedro', '', '', 'Jota Petra'),
-('Pedro', '$2y$10$tnCrO8NKnoUyb43mTHX0j.UC23tKklkRAkcmcuKPGvR2/Jcp4u.0q', 'pedro@santos.com', 'Avenida dos Estados, 13', 3646, 17, 'produtor', 'Santos', '', '', 'Agronomica'),
-('Marcao', '$2y$10$1Jn5.u74Mhj1YBKFY2XODOSbFkizrYtwrnosomT/rn7Hg/lNaFePO', 'marcao@nicolodi.com', '', 3554, 18, 'produtor', 'Nicolodi', '', '', ''),
-('Administrador', '$2y$10$Sn.G0RcSD8ZpwpeAVkB/NOdMSqdWujfsp4x.QGOSAqwTdyjRULbr6', 'administracao@epagri.com', 'Rua 501, 43', 4440, 19, 'admin', 'Admin', '(33) 8888-9999', '(44) 8888-2222', 'Centro');
+('Elisandro', '$2y$10$G3CnFMHI9WYpuuSvHBExZeuCZuNObwnBopUbK5FNUkKwoW6XVvm4y', 'elisandro@hotmail.com', 'Rua dos Macacos, 12', 804, 13, 'admin', 'Cunha', '(48) 1212-3333', '(12) 1233-1233', 'Trindade');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `visitas`
+-- Estrutura para tabela `visitas`
 --
 
 CREATE TABLE IF NOT EXISTS `visitas` (
@@ -5998,10 +5974,10 @@ CREATE TABLE IF NOT EXISTS `visitas` (
   `params_ideais_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_visita_ciclo1_idx` (`ciclo_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
 
 --
--- Dumping data for table `visitas`
+-- Fazendo dump de dados para tabela `visitas`
 --
 
 INSERT INTO `visitas` (`id`, `ciclo_id`, `oxigenio_agua`, `ionizacao_agua`, `temperatura_agua`, `largura_peixes`, `peso_peixes`, `data`, `params_ideais_id`) VALUES
@@ -6028,39 +6004,32 @@ INSERT INTO `visitas` (`id`, `ciclo_id`, `oxigenio_agua`, `ionizacao_agua`, `tem
 (32, 8, 15, 20, 14, 30, 30, '2015-10-20 23:27:09', NULL),
 (33, 53, 30, 20, 20, 30, 40, '2015-11-07 22:39:54', NULL),
 (34, 53, 30, 20, 20, 30, 40, '2015-11-07 22:40:17', NULL),
-(35, 53, 2, 5, 21, 30, 3, '2015-11-08 00:11:16', NULL),
-(36, 55, 40, 30, 50, 30, 20, '0000-00-00 00:00:00', NULL),
-(37, 55, 20, 20, 20, 20, 20, '0000-00-00 00:00:00', NULL),
-(38, 55, 5, 5, 5, 5, 5, '0000-00-00 00:00:00', NULL),
-(39, 55, 1, 1, 10, 4, 4, '0000-00-00 00:00:00', NULL),
-(40, 56, 10, 10, 10, 10, 10, '0000-00-00 00:00:00', NULL),
-(41, 57, 2, 2, 2, 2, 27.6667, '0000-00-00 00:00:00', NULL),
-(42, 56, 30, 30, 30, 30, 30, '0000-00-00 00:00:00', NULL);
+(35, 53, 2, 5, 21, 30, 3, '2015-11-08 00:11:16', NULL);
 
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Constraints for table `cidades`
+-- Restrições para tabelas `cidades`
 --
 ALTER TABLE `cidades`
   ADD CONSTRAINT `cidade_ibfk_1` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`);
 
 --
--- Constraints for table `comentarios`
+-- Restrições para tabelas `comentarios`
 --
 ALTER TABLE `comentarios`
   ADD CONSTRAINT `fk_comentarios_user1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `entrada_produtos`
+-- Restrições para tabelas `entrada_produtos`
 --
 ALTER TABLE `entrada_produtos`
   ADD CONSTRAINT `fk_entrada_produto_produto1` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `especies_categorias_cultivos`
+-- Restrições para tabelas `especies_categorias_cultivos`
 --
 ALTER TABLE `especies_categorias_cultivos`
   ADD CONSTRAINT `fk_ctg_cultivo_has_especie_ciclo1` FOREIGN KEY (`ciclo_id`) REFERENCES `ciclos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -6068,32 +6037,32 @@ ALTER TABLE `especies_categorias_cultivos`
   ADD CONSTRAINT `fk_ctg_cultivo_has_especie_especie1` FOREIGN KEY (`especie_id`) REFERENCES `especies` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `estoques`
+-- Restrições para tabelas `estoques`
 --
 ALTER TABLE `estoques`
   ADD CONSTRAINT `fk_estoque_produto1` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_estoque_user1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `notificacoes`
+-- Restrições para tabelas `notificacoes`
 --
 ALTER TABLE `notificacoes`
   ADD CONSTRAINT `fk_notificacoes_visitas1` FOREIGN KEY (`visita_id`) REFERENCES `visitas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `propriedades`
+-- Restrições para tabelas `propriedades`
 --
 ALTER TABLE `propriedades`
   ADD CONSTRAINT `cidade_id` FOREIGN KEY (`cidade_id`) REFERENCES `cidades` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `saida_produtos`
+-- Restrições para tabelas `saida_produtos`
 --
 ALTER TABLE `saida_produtos`
   ADD CONSTRAINT `fk_saida_produto_produto1` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `usuarios`
+-- Restrições para tabelas `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `id_cidade` FOREIGN KEY (`cidade_id`) REFERENCES `cidades` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;

@@ -33,9 +33,9 @@
                             <td><?= $ciclo->has('status') ? $this->Html->link($ciclo->status->nome, ['controller' => 'Status', 'action' => 'view', $ciclo->status->id]) : '' ?></td>
                             <td><?= h($ciclo->data_fim) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['action' => 'view', $ciclo->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $ciclo->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ciclo->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ciclo->id)]) ?>
+                                <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $ciclo->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
+                                <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $ciclo->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Editar']) ?>
+                                <?= $this->Form->postLink('<i class="fa fa-times fa-white"></i>', ['action' => 'delete', $ciclo->id], ['class' =>'btn btn-danger btn-sm', 'escape' => false, 'title' => 'Excluir', 'confirm' =>'Tem certeza que deseja apagar o ciclo {0}?', $ciclo->id]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

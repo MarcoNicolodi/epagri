@@ -12,6 +12,16 @@ class VisitasController extends AppController
         $this->LoadComponent('Notificador');
     }
 
+    public function isAuthorized($user = null)
+    {
+        parent::isAuthorized($this->Auth->user());
+
+        if($this->request->params['action'] == 'index' || $this->request->params['action'] == 'add')
+            return true;
+
+        return $this->Visitas->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario');
+    }
+
     public function index()
     {
         $this->paginate = [

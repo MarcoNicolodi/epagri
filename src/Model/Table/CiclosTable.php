@@ -105,4 +105,10 @@ class CiclosTable extends Table
             $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_fim']))))) : '';
 
     }
+
+    public function getOwner($id)
+    {
+        $q = $this->find('all')->where(['Ciclos.id' => $id])->contain(['Tanques' => ['Propriedades' => ['Usuarios']]])->first();
+        return $q->tanque->propriedade->usuario->id_usuario;
+    }
 }

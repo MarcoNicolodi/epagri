@@ -73,4 +73,10 @@ class VisitasTable extends Table
         $rules->add($rules->existsIn(['ciclo_id'], 'Ciclos'));
         return $rules;
     }
+
+    public function getOwner($id)
+    {
+        $q = $this->find('all')->where(['Visitas.id' => $id])->contain(['Ciclos' => ['Tanques' => ['Propriedades' => ['Usuarios']]]])->first();
+        return $q->ciclo->tanque->propriedade->usuario->id_usuario;
+    }
 }

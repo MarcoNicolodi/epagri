@@ -28,9 +28,9 @@
                             <td><?= h($usuario->endereco) ?></td>
                             <td><?= $usuario->has('cidade') ?  $usuario->cidade->nome.', '.$usuario->cidade->estado->uf : '' ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['action' => 'view', $usuario->id_usuario]) ?>
-                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $usuario->id_usuario]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $usuario->id_usuario], ['confirm' => __('Are you sure you want to delete # {0}?', $usuario->id_usuario)]) ?>
+                                <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $usuario->id_usuario], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
+                                <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $usuario->id_usuario], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Editar']) ?>
+                                <?= $this->Form->postLink('<i class="fa fa-times fa-white"></i>', ['action' => 'delete', $usuario->id_usuario], ['class' =>'btn btn-danger btn-sm', 'escape' => false, 'title' => 'Excluir', 'confirm' =>'Tem certeza que deseja apagar o usuário {0}?', $usuario->username]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -38,9 +38,9 @@
                 </table>
                 <div class="paginator">
                     <ul class="pagination">
-                        <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                        <?= $this->Paginator->prev('< ' . __('Próximo')) ?>
                         <?= $this->Paginator->numbers() ?>
-                        <?= $this->Paginator->next(__('next') . ' >') ?>
+                        <?= $this->Paginator->next(__('Anterior') . ' >') ?>
                     </ul>
                     <p><?= $this->Paginator->counter() ?></p>
                 </div>
