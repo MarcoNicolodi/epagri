@@ -33,7 +33,13 @@ class CiclosController extends AppController
         $this->paginate = [
             'contain' => ['Tanques', 'Status']
         ];
-        $this->set('ciclos', $this->paginate($this->Ciclos));
+        if($this->Auth->user('autorizacao') == 'produtor'){
+            $this->set('ciclos', $this->paginate($this->Ciclos->find()->matching('Tanques.Propriedades',function($q){
+                return $q->where(['Propriedades.usuario_id' => $this->Auth->user('id_usuario')]);
+            })));
+        } else {
+            $this->set('ciclos', $this->paginate($this->Ciclos));
+        }
         $this->set('_serialize', ['ciclos']);
     }
 
@@ -59,12 +65,16 @@ class CiclosController extends AppController
             }
         }
 
-        $propriedades = $this->Ciclos->Tanques->Propriedades->find('list');
-        $tanques = $this->Ciclos->Tanques->find('list')->notMatching('Ciclos', function ($q) {
-                                                        return $q->where(['Ciclos.status_id' => 1]);
-                                                    });
-        $status = $this->Ciclos->Status->find('list');
-        $this->set(compact('ciclo', 'tanques', 'status','propriedades'));
+        if($this->Auth->user('autorizacao') == 'produtor'){
+            $propriedades = $this->Ciclos->Tanques->Propriedades->find('list')->where(['usuario_id' => $this->Auth->user('id_usuario')]);
+        } else {
+            $propriedades = $this->Ciclos->Tanques->Propriedades->find('list');
+        }
+        // $tanques = $this->Ciclos->Tanques->find('list')->notMatching('Ciclos', function ($q) {
+        //                                                 return $q->where(['Ciclos.status_id' => 1]);
+        //                                             });
+        $status = $this->Ciclos->Status->find('list',['order' => 'nome']);
+        $this->set(compact('ciclo',  'status','propriedades'));
         $this->set('_serialize', ['ciclo']);
     }
 
@@ -73,12 +83,15 @@ class CiclosController extends AppController
         $ciclo = $this->Ciclos->get($id, [
             'contain' => []
         ]);
+        $ciclo->data_inicio = $ciclo->data_inicio->format('d/m/Y');
+        $ciclo->data_fim->format('d/m/Y');
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);
             if ($this->Ciclos->save($ciclo)) {
                 $this->Flash->success(__('Ciclo atualizado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                debug($ciclo);
                 $this->Flash->error('Ocorreu um problema ao tentar atualizar o Ciclo. Por favor, tente novamente');
             }
         }

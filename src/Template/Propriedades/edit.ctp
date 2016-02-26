@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h2 class="page-header"> Propriedades </h2>
+        <h2 class="page-header"> Propriedades <small class="pull-right"> <?= $propriedade->nome ?></small></h2>
     </div>
 </div>
 <div class="row">
@@ -18,10 +18,10 @@
                 <?= $this->Form->input('tamanho',['class' => 'form-control']); ?>
             </div>
             <div class="form-group">
-                <?= $this->Form->input('usuario_id',['class' => 'form-control']); ?>
+                <?= $this->Form->input('endereco',['class' => 'form-control']); ?>
             </div>
             <div class="form-group">
-                <?= $this->Form->input('endereço',['class' => 'form-control']); ?>
+                <?= $this->Form->input('estado_id',['options' => $estados, 'class' => 'form-control']); ?>
             </div>
             <div class="form-group">
                 <?= $this->Form->input('cidade_id',['class' => 'form-control']); ?>
@@ -31,3 +31,23 @@
         </div>
     </div>
 </div>
+<?php $this->start('script'); ?>
+<?= $this->fetch('script'); ?>
+<script type="text/javascript">
+    $("select[name='estado_id']").change(function(){
+        $.ajax({
+            url: "<?= $this->Url->build(['controller' => 'Cidades','action' => 'getByEstado'])?>"+"/"+this.value+".json",
+            success: function(data){
+                $("select[name='cidade_id']").empty();
+                $.each(data.cidades, function(k,v){
+                    console.log(v.id, v.nome);
+                    $("select[name='cidade_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                })
+            },
+            error: function(e){
+                console.log("Erro: "+e);
+            }
+        });
+    });
+</script>
+<?php $this->end(); ?>

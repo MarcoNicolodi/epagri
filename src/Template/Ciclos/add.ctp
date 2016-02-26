@@ -15,7 +15,7 @@
                     <?= $this->Form->input('propriedade_id', ['options' => $propriedades,'class' => 'form-control']); ?>
                 </div>
                 <div class="form-group">
-                    <?= $this->Form->input('tanque_id', ['options' => $tanques,'class' => 'form-control']); ?>
+                    <?= $this->Form->input('tanque_id', ['options' => [null => 'Selecione uma propriedade'],'class' => 'form-control']); ?>
                 </div>
                 <div class="form-group">
                     <?= $this->Form->input('nome', ['class' => 'form-control']); ?>

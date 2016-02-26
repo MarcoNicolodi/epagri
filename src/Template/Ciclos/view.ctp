@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <th><?= __('Povoamento Inicio') ?></th>
-                        <td><?= $this->Number->format($ciclo->povoamento_inicio) ?></td>
+                        <td><?= $ciclo->povoamento_inicio ?></td>
                     </tr>
                     <tr>
                         <th><?= __('Data Inicio') ?></th>

@@ -14,24 +14,24 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th><?= $this->Paginator->sort('id') ?></th>
+                            <th><?= $this->Paginator->sort('nome') ?></th>
                             <th><?= $this->Paginator->sort('tanque_id') ?></th>
                             <th><?= $this->Paginator->sort('data_inicio') ?></th>
-                            <th><?= $this->Paginator->sort('povoamento_inicio') ?></th>
+                            <th><?= $this->Paginator->sort('povoamento_inicio','Povoamento Inicial') ?></th>
                             <th><?= $this->Paginator->sort('status_id') ?></th>
                             <th><?= $this->Paginator->sort('data_fim') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ações') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($ciclos as $ciclo): ?>
                         <tr>
-                            <td><?= $this->Number->format($ciclo->id) ?></td>
+                            <td><?= $ciclo->nome ?></td>
                             <td><?= $ciclo->has('tanque') ? $this->Html->link($ciclo->tanque->nome, ['controller' => 'Tanques', 'action' => 'view', $ciclo->tanque->id]) : '' ?></td>
-                            <td><?= h($ciclo->data_inicio) ?></td>
-                            <td><?= $this->Number->format($ciclo->povoamento_inicio) ?></td>
+                            <td><?= $ciclo->data_inicio->format('d/m/Y')//date('d/m/Y',strtotime($ciclo->data_inicio))//$this->Time->format(h($ciclo->data_inicio),'MM/dd/YYYY'); ?></td>
+                            <td><?= $ciclo->povoamento_inicio ?></td>
                             <td><?= $ciclo->has('status') ? $this->Html->link($ciclo->status->nome, ['controller' => 'Status', 'action' => 'view', $ciclo->status->id]) : '' ?></td>
-                            <td><?= h($ciclo->data_fim) ?></td>
+                            <td><?= $ciclo->data_fim->format('d/m/Y') //date('d/m/Y',strtotime($ciclo->data_fim))//$this->Time->format($ciclo->data_fim,'MM/dd/YYYY'); ?></td>
                             <td class="actions">
                                 <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $ciclo->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
                                 <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $ciclo->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Editar']) ?>

@@ -339,9 +339,10 @@ DispatcherFactory::add('Asset');
 DispatcherFactory::add('Routing');
 DispatcherFactory::add('ControllerFactory');
 
+//Comentei esse Type::build pq tava dando problema ao salvar data
 /**
  * Enable default locale format parsing.
  * This is needed for matching the auto-localized string output of Time() class when parsing dates.
  */
-Type::build('date')->useLocaleParser();
-Type::build('datetime')->useLocaleParser();
+// Type::build('date')->useLocaleParser();
+// Type::build('datetime')->useLocaleParser();

@@ -44,7 +44,7 @@ class TanquesTable extends Table
             ->notEmpty('nome');
 
         $validator
-            ->requirePresence('propriedade_id')
+            ->requirePresence('propriedade_id','create')
             ->notEmpty('propriedade_id')
             ->add('propriedade_id','valid',['rule' => 'numeric']);
 

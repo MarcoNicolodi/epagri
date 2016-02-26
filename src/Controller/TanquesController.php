@@ -12,8 +12,12 @@ class TanquesController extends AppController
         if(parent::isAuthorized($this->Auth->user()))
             return true;
 
-        if($this->request->params['action'] == 'index'){
+        if($this->request->params['action'] == 'index' || $this->request->params['action'] == 'add'){
             return true;
+        }
+
+        if($this->request->params['action'] == 'getInativosByPropriedade' || $this->request->params['action'] == 'getAtivosByPropriedade'){
+            return $this->Tanques->Propriedades->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario');
         }
 
         //checa se o tanque passado por parametro pertence a uma propriedade do usuario logado
@@ -32,6 +36,7 @@ class TanquesController extends AppController
         $this->set('_serialize',['tanques']);
     }
 
+    //retorna tanques que estao participando de ciclos
     public function getAtivosByPropriedade($propriedade_id)
     {
         $tanques = $this->Tanques->find()->where(['propriedade_id' => $propriedade_id])->matching('Ciclos', function ($q) {
@@ -79,7 +84,13 @@ class TanquesController extends AppController
             }
         }
         $coberturas = $this->Tanques->Coberturas->find('list',['order' => 'nome']);
-        $usuarios = $this->Tanques->Propriedades->Usuarios->find('list', ['order' => 'username']);
+
+        if($this->Auth->user('autorizacao') == 'produtor'){
+            $usuarios = $this->Tanques->Propriedades->Usuarios->find('list')->where(['id_usuario' => $this->Auth->user('id_usuario')]);
+
+        } else {
+            $usuarios = $this->Tanques->Propriedades->Usuarios->find('list', ['limit' => 200,'order' => 'username']);
+        }
         $this->set(compact('tanque', 'coberturas', 'usuarios'));
         $this->set('_serialize', ['tanque']);
     }
@@ -91,6 +102,7 @@ class TanquesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $tanque = $this->Tanques->patchEntity($tanque, $this->request->data);
+            debug($tanque);
             if ($this->Tanques->save($tanque)) {
                 $this->Flash->success(__('Tanque atualizado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
@@ -98,8 +110,8 @@ class TanquesController extends AppController
                 $this->Flash->error(__('Ocorreu um problema ao tentar atualizar o tanque. Por favor, tente novamente.'));
             }
         }
-        $coberturas = $this->Tanques->Coberturas->find('list', ['limit' => 200]);
-        $propriedades = $this->Tanques->Propriedades->find('list', ['limit' => 200]);
+
+        $coberturas = $this->Tanques->Coberturas->find('list', ['limit' => 200, 'order' => 'nome']);
         $this->set(compact('tanque', 'coberturas', 'propriedades'));
         $this->set('_serialize', ['tanque']);
     }

@@ -26,18 +26,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <?= $this->Form->input('password', ['class' => 'form-control', 'label' => 'Senha']); ?>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <?= $this->Form->input('password2', ['class' => 'form-control', 'label' => 'Confirmar Senha']); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <?= $this->Form->input('telefone1', ['class' => 'form-control', 'label' => 'Telefone 1']); ?>
                         </div>
                     </div>

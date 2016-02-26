@@ -86,5 +86,24 @@ a i.fa-white {
   -ms-filter: blur(5px);
   filter: blur(5px);
 }
-
 /* fim codigo tela do login */
+
+.label {
+    padding: 3px 5px;
+    border-radius: 3px;
+    color: white;
+    font-size: 13px;
+    
+}
+
+.label-danger {
+    background-color: #D9534F;
+}
+
+.label-success {
+    background-color: #5CB85C;
+}
+
+.label-warning {
+    background-color: #F0AD4E;
+}

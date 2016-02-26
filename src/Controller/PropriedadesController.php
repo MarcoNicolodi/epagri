@@ -75,9 +75,12 @@ class PropriedadesController extends AppController
             }
         }
 
-
-        $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200,'order' => 'username']);
-        $estados = $this->Propriedades->Cidades->Estados->find('list', ['limit' => 200]);
+        if($this->Auth->user('autorizacao') == 'produtor'){
+            $usuarios = $this->Propriedades->Usuarios->find('list')->where(['id_usuario' => $this->Auth->user('id_usuario')]);
+        } else {
+            $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200,'order' => 'username']);
+        }
+        $estados = $this->Propriedades->Cidades->Estados->find('list', ['limit' => 200, 'order' => 'nome']);
         $this->set(compact('propriedade', 'usuarios', 'estados'));
         $this->set('_serialize', ['propriedade']);
     }
@@ -96,9 +99,9 @@ class PropriedadesController extends AppController
                 $this->Flash->error(__('Ocorreu um problema ao tentar atualizar a propriedade. Por favor, tente novamente.'));
             }
         }
-        $usuarios = $this->Propriedades->Usuarios->find('list', ['limit' => 200]);
-        $cidades = $this->Propriedades->Cidades->find('list', ['limit' => 200]);
-        $this->set(compact('propriedade', 'usuarios', 'cidades'));
+
+        $estados = $this->Propriedades->Cidades->Estados->find('list', ['limit' => 200, 'order' => 'nome']);
+        $this->set(compact('propriedade', 'usuarios', 'estados'));
         $this->set('_serialize', ['propriedade']);
     }
 

@@ -80,30 +80,32 @@ class CiclosTable extends Table
     //impede o cadastro de um ciclo em um tanque relacionado a um ciclo em atividade(status_id = 1)
     public function beforeSave(Event $event, $entity, \ArrayObject $options)
     {
-        $tanques = TableRegistry::get('Tanques')->find()->notMatching('Ciclos', function ($q) {
-                                                        return $q->where(['Ciclos.status_id' => 1]);
-                                                    })->select('id');
+        if($entity->dirty('tanque_id')){
+            $tanques = TableRegistry::get('Tanques')->find()->notMatching('Ciclos', function ($q) {
+                                                            return $q->where(['Ciclos.status_id' => 1]);
+                                                        })->select('id');
 
-        $ids = [];
-        foreach($tanques as $t){
-            array_push($ids, $t->id);
+            $ids = [];
+            foreach($tanques as $t){
+                array_push($ids, $t->id);
+            }
+            if(!in_array($entity->tanque_id,$ids)){
+                $event->stopPropagation();
+                return false;
+            }
+            return true;
         }
-
-        if(!in_array($entity->tanque_id,$ids)){
-            $event->stopPropagation();
-            return false;
-        }
-        return true;
     }
 
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
         if(array_key_exists('data_inicio', $data))
-            $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime($data['data_inicio'])) : '';
+            $data['data_inicio'] = ($data['data_inicio']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_inicio']))))) : '';
 
         if(array_key_exists('data_fim', $data))
             $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_fim']))))) : '';
 
+        debug($data);
     }
 
     public function getOwner($id)

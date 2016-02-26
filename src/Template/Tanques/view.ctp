@@ -44,20 +44,18 @@
                     <tr>
                         <th><?= __('Tanque') ?></th>
                         <th><?= __('Data Inicio') ?></th>
-                        <th><?= __('Status') ?></th>
                         <th><?= __('Data Fim') ?></th>
+                        <th><?= __('Status') ?></th>
                         <th class="actions"><?= __('Actions') ?></th>
                     </tr>
-                    <?php foreach ($tanque->ciclos as $ciclos): ?>
+                    <?php  foreach ($tanque->ciclos as $ciclos): ?>
                     <tr>
-                        <td><?= h($ciclos->tanque_id) ?></td>
-                        <td><?= h($ciclos->data_inicio) ?></td>
-                        <td><?= h($ciclos->status_id) ?></td>
-                        <td><?= h($ciclos->data_fim) ?></td>
+                        <td><?= $this->Html->link($ciclos->nome,['controller' => 'ciclos','action' => 'view',$ciclos->id]) ?></td>
+                        <td><?= h($ciclos->data_inicio->format('d/m/Y')) ?></td>
+                        <td><?= h($ciclos->data_fim->format('d/m/Y')); ?></td>
+                        <td><?= $ciclos->status_id == 1 ? "<span class='label label-success'>ativo</span>" : "<span class='label label-warning'>finalizado</span>" ?></span></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['controller' => 'Ciclos', 'action' => 'view', $ciclos->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['controller' => 'Ciclos', 'action' => 'edit', $ciclos->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Ciclos', 'action' => 'delete', $ciclos->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ciclos->id)]) ?>
+                            <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['controller' => 'ciclos', 'action' => 'view', $ciclos->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
