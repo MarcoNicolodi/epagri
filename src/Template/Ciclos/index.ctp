@@ -28,10 +28,10 @@
                         <tr>
                             <td><?= $ciclo->nome ?></td>
                             <td><?= $ciclo->has('tanque') ? $this->Html->link($ciclo->tanque->nome, ['controller' => 'Tanques', 'action' => 'view', $ciclo->tanque->id]) : '' ?></td>
-                            <td><?= $ciclo->data_inicio->format('d/m/Y')//date('d/m/Y',strtotime($ciclo->data_inicio))//$this->Time->format(h($ciclo->data_inicio),'MM/dd/YYYY'); ?></td>
+                            <td><?= $this->Time->format($ciclo->data_inicio,'dd/MM/yyyy') ?></td>
                             <td><?= $ciclo->povoamento_inicio ?></td>
-                            <td><?= $ciclo->has('status') ? $this->Html->link($ciclo->status->nome, ['controller' => 'Status', 'action' => 'view', $ciclo->status->id]) : '' ?></td>
-                            <td><?= $ciclo->data_fim->format('d/m/Y') //date('d/m/Y',strtotime($ciclo->data_fim))//$this->Time->format($ciclo->data_fim,'MM/dd/YYYY'); ?></td>
+                            <td><?= $ciclo->has('status') ? ($ciclo->status_id == 1 ? "<span class='label label-success'> ativo </span>" : "<span class='label label-warning'> finalizado </span>") : '' ?></td>
+                            <td><?= $this->Time->format($ciclo->data_fim,'dd/MM/yyyy'); ?></td>
                             <td class="actions">
                                 <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['action' => 'view', $ciclo->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>
                                 <?= $this->Html->link('<i class="fa fa-pencil fa-white"></i>', ['action' => 'edit', $ciclo->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Editar']) ?>

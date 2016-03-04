@@ -181,10 +181,9 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     <?= $this->Html->script('sb-admin-2.js') ?>
     <?= $this->Html->script('metisMenu.js') ?>
     <?= $this->Html->script('custom.js') ?>
+    <?= $this->Html->script('../bower_components/Chart.js/Chart.js') ?>
     <?= $this->fetch('script') ?>
-    <!-- select2 plugin CDN -->
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
 </body>
 </html>

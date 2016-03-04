@@ -51,8 +51,8 @@
                     <?php  foreach ($tanque->ciclos as $ciclos): ?>
                     <tr>
                         <td><?= $this->Html->link($ciclos->nome,['controller' => 'ciclos','action' => 'view',$ciclos->id]) ?></td>
-                        <td><?= h($ciclos->data_inicio->format('d/m/Y')) ?></td>
-                        <td><?= h($ciclos->data_fim->format('d/m/Y')); ?></td>
+                        <td><?= $this->Time->format($ciclos->data_inicio,'dd/MM/yyyy') ?></td>
+                        <td><?= $this->Time->format($ciclos->data_fim,'dd/MM/yyyy')?></td>
                         <td><?= $ciclos->status_id == 1 ? "<span class='label label-success'>ativo</span>" : "<span class='label label-warning'>finalizado</span>" ?></span></td>
                         <td class="actions">
                             <?= $this->Html->link('<i class="fa fa-search fa-white"></i>', ['controller' => 'ciclos', 'action' => 'view', $ciclos->id], ['class' => 'btn btn-primary btn-sm', 'escape' => false, 'title' => 'Visualizar']) ?>

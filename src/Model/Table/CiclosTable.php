@@ -61,6 +61,17 @@ class CiclosTable extends Table
 
         $validator
             ->add('data_fim', 'valid', ['rule' => 'date'])
+            ->add('data_fim','custom',[
+                'rule' => function($value,$context){
+                    $data_fim = strtotime($value);
+                    $data_inicio = strtotime($context['data']['data_inicio']);
+                    if($data_inicio > $data_fim)
+                        return false;
+
+                    return true;
+                },
+                'message' => 'A data de finalização não pode ocorrer antes da data de início'
+            ])
             ->allowEmpty('data_fim');
 
         $validator
@@ -97,6 +108,7 @@ class CiclosTable extends Table
         }
     }
 
+    //converte datas do php para o sql
     public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
     {
         if(array_key_exists('data_inicio', $data))
@@ -104,8 +116,6 @@ class CiclosTable extends Table
 
         if(array_key_exists('data_fim', $data))
             $data['data_fim'] = ($data['data_fim']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data_fim']))))) : '';
-
-        debug($data);
     }
 
     public function getOwner($id)
@@ -113,4 +123,12 @@ class CiclosTable extends Table
         $q = $this->find('all')->where(['Ciclos.id' => $id])->contain(['Tanques' => ['Propriedades' => ['Usuarios']]])->first();
         return $q->tanque->propriedade->usuario->id_usuario;
     }
+
+    public function getMediaPesoPeixes($id)
+    {
+        $q = $this->find('all')->where(['Ciclos.id' => $id])->contain('Visitas');
+        //$q->select(['avg' => $q->func()->avg('Visitas.peso_peixes')]);
+        debug($q->toArray());die;
+    }
+
 }

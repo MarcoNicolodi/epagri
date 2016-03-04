@@ -12,7 +12,7 @@
             <div class="panel-body">
                 <?= $this->Form->create($ciclo) ?>
                 <div class="form-group">
-                    <?= $this->Form->input('propriedade_id', ['options' => $propriedades,'class' => 'form-control']); ?>
+                    <?= $this->Form->input('propriedade_id', ['empty' => 'Selecione uma propriedade', 'options' => $propriedades,'class' => 'form-control']); ?>
                 </div>
                 <div class="form-group">
                     <?= $this->Form->input('tanque_id', ['options' => [null => 'Selecione uma propriedade'],'class' => 'form-control']); ?>
@@ -42,16 +42,27 @@
 <?= $this->fetch('script'); ?>
 <script type="text/javascript">
     $("select[name='propriedade_id']").change(function(){
+        if(!this.value.length){
+            $("select[name='tanque_id']").empty();
+            $("select[name='tanque_id']").append("<option value="+null+">Selecione uma propriedade</option>");
+            return;
+        }
+
         $.ajax({
             url: "<?= $this->Url->build(['controller' => 'Tanques','action' => 'getInativosByPropriedade'])?>"+"/"+this.value+".json",
             success: function(data){
                 $("select[name='tanque_id']").empty();
-                $.each(data.tanques, function(k,v){
-                    console.log(v.id, v.nome);
-                    $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
-                })
+                if(typeof data.tanques != undefined){
+                    $.each(data.tanques, function(k,v){
+                        console.log(v.id, v.nome);
+                        $("select[name='tanque_id']").append("<option value='"+v.id+"'>"+v.nome+"</option>");
+                    })
+                } else {
+                    $("select[name='tanque_id']").append("<option value="+null+">Selecione uma propriedade</option>");
+                }
             },
             error: function(e){
+                $("select[name='tanque_id']").append("<option value="+null+">Selecione uma propriedade</option>");
                 console.log("Erro: "+e);
             }
         });

@@ -36,7 +36,8 @@ class VisitasController extends AppController
         $visita = $this->Visitas->get($id, [
             'contain' => ['Ciclos' =>['Tanques' =>['Propriedades']], 'Notificacoes']
         ]);
-        $this->set('visita', $visita);
+        $medias = $this->Visitas->getAllMedias($this->Visitas->getCicloId($id));
+        $this->set(compact('visita', 'medias'));
         $this->set('_serialize', ['visita']);
     }
 

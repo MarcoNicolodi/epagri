@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <h2 class="page-header"> Ciclos </h2>
+        <h2 class="page-header"> Ciclos <small class="pull-right"> <?= $ciclo->nome ?></small></h2>
     </div>
 </div>
 <div class="row">
@@ -13,26 +13,22 @@
                 <table class="table table-striped">
                     <tr>
                         <th><?= __('Tanque') ?></th>
-                        <td><?= $ciclo->has('tanque') ? $this->Html->link($ciclo->tanque->id, ['controller' => 'Tanques', 'action' => 'view', $ciclo->tanque->id]) : '' ?></td>
+                        <td><?= $ciclo->has('tanque') ? $this->Html->link($ciclo->tanque->nome, ['controller' => 'Tanques', 'action' => 'view', $ciclo->tanque->id]) : '' ?></td>
                     </tr>
                     <tr>
                         <th><?= __('Status') ?></th>
-                        <td><?= $ciclo->has('status') ? $this->Html->link($ciclo->status->id, ['controller' => 'Status', 'action' => 'view', $ciclo->status->id]) : '' ?></td>
+                        <td><?= $ciclo->has('status') ? ($ciclo->status_id == 1 ? "<span class='label label-success'> ativo </label>" : "<span class='label label-warning'> finalizado </label>") : '' ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Id') ?></th>
-                        <td><?= $this->Number->format($ciclo->id) ?></td>
-                    </tr>
-                    <tr>
-                        <th><?= __('Povoamento Inicio') ?></th>
+                        <th><?= __('Povoamento Inicial') ?></th>
                         <td><?= $ciclo->povoamento_inicio ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Data Inicio') ?></th>
+                        <th><?= __('Data de início') ?></th>
                         <td><?= $this->Time->format($ciclo->data_inicio,'dd/MM/yyyy') ?></tr>
                     </tr>
                     <tr>
-                        <th><?= __('Data Fim') ?></th>
+                        <th><?= __('Data de finalização') ?></th>
                         <td><?= $this->Time->format($ciclo->data_fim,'dd/MM/yyyy') ?></tr>
                     </tr>
                 </table>
@@ -50,8 +46,6 @@
                 <?php if (!empty($ciclo->visitas)): ?>
                 <table class="table table-striped">
                     <tr>
-
-                        <th>Ciclo</th>
                         <th>Data</th>
                         <th>Oxigenio</th>
                         <th>Ionizacao</th>
@@ -64,7 +58,6 @@
                     </tr>
                     <?php foreach ($ciclo->visitas as $visitas): ?>
                     <tr>
-                        <td><?= h($visitas->ciclo_id) ?></td>
                         <td><?= $this->Time->format(h($visitas->data),'dd/MM/yyyy') ?></td>
                         <td><?= h($visitas->oxigenio_agua) ?></td>
                         <td><?= h($visitas->ionizacao_agua) ?></td>

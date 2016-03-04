@@ -3,6 +3,7 @@
         <h2 class="page-header"> Visitas <small> <?= h($visita->ciclo->tanque->propriedade->nome) ?></small> <small class="pull-right"> <?= h($visita->data)?> </small></h2>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-6">
         <div class="panel panel-green">

@@ -48,6 +48,8 @@ class CiclosController extends AppController
         $ciclo = $this->Ciclos->get($id, [
             'contain' => ['Tanques', 'Status', 'EspeciesCategoriasCultivos', 'Visitas' => ['Notificacoes']]
         ]);
+
+        $medias = $this->Ciclos->Visitas->getAllMedias($id);
         $this->set('ciclo', $ciclo);
         $this->set('_serialize', ['ciclo']);
     }
@@ -66,7 +68,10 @@ class CiclosController extends AppController
         }
 
         if($this->Auth->user('autorizacao') == 'produtor'){
-            $propriedades = $this->Ciclos->Tanques->Propriedades->find('list')->where(['usuario_id' => $this->Auth->user('id_usuario')]);
+            $propriedades = $this->Ciclos->Tanques->Propriedades->find('list')->where(['usuario_id' => $this->Auth->user('id_usuario')])
+                                                                ->notMatching('Tanques.Ciclos',function($q){
+                                                                    return $q->where(['Ciclos.status_id' => 1]);
+                                                                });
         } else {
             $propriedades = $this->Ciclos->Tanques->Propriedades->find('list');
         }
@@ -80,18 +85,20 @@ class CiclosController extends AppController
 
     public function edit($id = null)
     {
+        $this->Ciclos->Visitas->getMediaPesoPeixes($id);
         $ciclo = $this->Ciclos->get($id, [
             'contain' => []
         ]);
-        $ciclo->data_inicio = $ciclo->data_inicio->format('d/m/Y');
-        $ciclo->data_fim->format('d/m/Y');
         if ($this->request->is(['patch', 'post', 'put'])) {
+            //debug($this->request->data);
             $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);
+            debug($ciclo);
             if ($this->Ciclos->save($ciclo)) {
+            debug($ciclo);
+                //debug($ciclo);die;
                 $this->Flash->success(__('Ciclo atualizado com sucesso.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                debug($ciclo);
                 $this->Flash->error('Ocorreu um problema ao tentar atualizar o Ciclo. Por favor, tente novamente');
             }
         }
