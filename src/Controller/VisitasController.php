@@ -10,6 +10,7 @@ class VisitasController extends AppController
     {
         parent::initialize();
         $this->LoadComponent('Notificador');
+        $this->Auth->allow('getCharts');
     }
 
     public function isAuthorized($user = null)
@@ -36,7 +37,7 @@ class VisitasController extends AppController
         $visita = $this->Visitas->get($id, [
             'contain' => ['Ciclos' =>['Tanques' =>['Propriedades']], 'Notificacoes']
         ]);
-        $medias = $this->Visitas->getAllMedias($this->Visitas->getCicloId($id));
+
         $this->set(compact('visita', 'medias'));
         $this->set('_serialize', ['visita']);
     }
@@ -101,4 +102,53 @@ class VisitasController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function getCharts($id,$chart)
+    {
+        if($this->request->is('ajax') || $this->request->is('json')){
+
+            $visita = $this->Visitas->get($id);
+            switch($chart){
+                case 'pesoPeixes':
+                    $response['chart']['labels'] = ['Visita','Média'];
+                    $response['chart']['data'] = ['visita' => $visita->peso_peixes,'media' => $this->Visitas->getMediaPesoPeixes($visita->ciclo_id)];
+                break;
+                case 'larguraPeixes':
+                    $response['chart']['labels'] = ['Visita','Média'];
+                    $response['chart']['data'] = ['visita' => $visita->largura_peixes,'media' => $this->Visitas->getMediaLarguraPeixes($visita->ciclo_id)];
+                break;
+                case 'temperaturaAgua':
+                    $response['chart']['labels'] = ['Visita','Média'];
+                    $response['chart']['data'] = ['visita' => $visita->temperatura_agua,'media' => $this->Visitas->getMediaTemperaturaAgua($visita->ciclo_id)];
+                break;
+                case 'oxigenacaoAgua':
+                    $response['chart']['labels'] = ['Visita','Média'];
+                    $response['chart']['data'] = ['visita' => $visita->oxigenio_agua,'media' => $this->Visitas->getMediaOxigenacaoAgua($visita->ciclo_id)];
+                break;
+                case 'ionizacaoAgua':
+                    $response['chart']['labels'] = ['Visita','Média'];
+                    $response['chart']['data'] = ['visita' => $visita->ionizacao_agua,'media' => $this->Visitas->getMediaIonizacaoAgua($visita->ciclo_id)];
+                break;
+                case 'all':
+                    $response['chart']['labels'] = ['Visita','Média'];
+                    $response['chart']['data']['medias'] = $this->Visitas->getAllMedias($visita->ciclo_id);
+                    $response['chart']['data']['visita'] = ['peso_peixes' => $visita->peso_peixes,
+                                                            'largura_peixes' => $visita->largura_peixes,
+                                                            'temperatura_agua' => $visita->temperatura_agua,
+                                                            'oxigenio_agua' => $visita->oxigenio_agua,
+                                                            'ionizacao_agua' => $visita->ionizacao_agua];
+                break;
+                default:
+                    $response['type'] = 'error';
+                    $response['message'] = 'Invalid chart';
+                break;
+            }
+        } else {
+            $response['type'] = 'error';
+            $response['message'] = 'Only ajax requests allowed';
+        }
+        $this->set('response',$response);
+        $this->set('_serialize',['response']);
+    }
+
 }

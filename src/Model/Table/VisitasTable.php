@@ -60,10 +60,10 @@ class VisitasTable extends Table
             ->requirePresence('ciclo_id')
             ->notEmpty('ciclo_id');
 
-        // $validator
-        //     ->add('data','valid',['rule' => 'date'])
-        //     ->requirePresense('data')
-        //     ->notEmpty('data');
+        $validator
+            ->add('data','valid',['rule' => 'date'])
+            ->requirePresense('data')
+            ->notEmpty('data');
 
         return $validator;
     }

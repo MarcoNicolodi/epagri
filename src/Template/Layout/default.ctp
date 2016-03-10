@@ -34,7 +34,6 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
 
     <?= $this->Html->css('font-awesome/css/font-awesome.min.css') ?>
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-    <?= $this->Html->css('select2-bootstrap.css') ?>
     <?= $this->Html->css('custom.css') ?>
 
     <?= $this->fetch('meta') ?>

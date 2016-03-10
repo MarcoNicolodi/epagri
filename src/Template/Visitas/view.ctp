@@ -57,12 +57,131 @@
     <div class="col-md-6">
         <div class="panel <?= $visita->notificacao->alerta_alimentacao == 'success' ? 'panel-green' : ($visita->notificacao->alerta_alimentacao == 'warning' ? 'panel-yellow' : 'panel-red') ?>">
             <div class="panel-heading">
-                <h3 class="panel-title"> Alimentacao </h3>
+                <h3 class="panel-title"> Alimentação </h3>
             </div>
             <div class="panel-body">
                 <p><?= $visita->notificacao->alimentacao ?></p>
             </div>
         </div>
     </div>
-
 </div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h3 class="panel-title">Peso dos peixes</h3>
+            </div>
+            <div class="panel-body">
+                <canvas id="chartPesoPeixes" width="150" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h3 class="panel-title">Largura dos peixes</h3>
+            </div>
+            <div class="panel-body">
+                <canvas id="chartLarguraPeixes" width="150" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h3 class="panel-title">Temperatura da Água</h3>
+            </div>
+            <div class="panel-body">
+                <canvas id="chartTemperaturaAgua" width="150" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ionizacao da Água</h3>
+            </div>
+            <div class="panel-body">
+                <canvas id="chartIonizacaoAgua" width="150" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h3 class="panel-title">Oxigenacao da Agua</h3>
+            </div>
+            <div class="panel-body">
+                <canvas id="chartOxigenioAgua" width="150" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<?php $this->start('script'); ?>
+<?= $this->fetch('script'); ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            method: 'GET',
+            url: "<?= $this->Url->build(['controller' => 'Visitas', 'action' => 'getCharts', $visita->id,  'all', '_ext' => 'json'])?>",
+            success: function(data){
+                //console.log('Success: '+JSON.stringify(data));
+
+                var chartData = [];
+
+                chartData.labels = ['Visita','Média'];
+                chartData.datasets = [];
+                var datasets =
+                    {
+                        //data: [data.response.chart.data.visita,data.response.chart.data.media],
+                        label: "Dados visita",
+                        fillColor: "rgba(255,0,0,0.3)",
+                        strokeColor: "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(220,220,220,0.75)",
+                        highlightStroke: "rgba(220,220,220,1)"
+                    };
+                var data_chart_peso_peixes = {data:[data.response.chart.data.medias.media_peso_peixes,data.response.chart.data.visita.peso_peixes]};
+                var data_chart_largura_peixes = {data:[data.response.chart.data.medias.media_largura_peixes,data.response.chart.data.visita.largura_peixes]};
+                var data_chart_temperatura_agua = {data:[data.response.chart.data.medias.media_temperatura_agua,data.response.chart.data.visita.temperatura_agua]};
+                var data_chart_oxigenio_agua = {data:[data.response.chart.data.medias.media_oxigenacao_agua,data.response.chart.data.visita.oxigenio_agua]};
+                var data_chart_ionizacao_agua = {data:[data.response.chart.data.medias.media_ionizacao_agua,data.response.chart.data.visita.ionizacao_agua]};
+
+                $.extend(datasets,data_chart_peso_peixes);
+                var ctx = document.getElementById('chartPesoPeixes').getContext('2d');
+                chartData.datasets.push(datasets);
+                chart = new Chart(ctx).Bar(chartData,[]);
+
+                $.extend(datasets,data_chart_largura_peixes);
+                var ctx = document.getElementById('chartLarguraPeixes').getContext('2d');
+                chartData.datasets = [datasets];
+                chart = new Chart(ctx).Bar(chartData,[]);
+
+                $.extend(datasets,data_chart_temperatura_agua);
+                var ctx = document.getElementById('chartTemperaturaAgua').getContext('2d');
+                chartData.datasets = [datasets];
+                chart = new Chart(ctx).Bar(chartData,[]);
+
+                $.extend(datasets,data_chart_ionizacao_agua);
+                var ctx = document.getElementById('chartIonizacaoAgua').getContext('2d');
+                chartData.datasets = [datasets];
+                chart = new Chart(ctx).Bar(chartData,[]);
+
+                $.extend(datasets,data_chart_oxigenio_agua);
+                var ctx = document.getElementById('chartOxigenioAgua').getContext('2d');
+                chartData.datasets = [datasets];
+                chart = new Chart(ctx).Bar(chartData,[]);
+            },
+            error: function(e){
+                console.log("Error: "+e.message);
+            }
+        });
+    });
+</script>
+<?php $this->end(); ?>
