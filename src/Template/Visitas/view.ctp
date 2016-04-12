@@ -132,10 +132,7 @@
             method: 'GET',
             url: "<?= $this->Url->build(['controller' => 'Visitas', 'action' => 'getCharts', $visita->id,  'all', '_ext' => 'json'])?>",
             success: function(data){
-                //console.log('Success: '+JSON.stringify(data));
-
                 var chartData = [];
-
                 chartData.labels = ['Visita','Média'];
                 chartData.datasets = [];
                 var datasets =
@@ -147,11 +144,11 @@
                         highlightFill: "rgba(220,220,220,0.75)",
                         highlightStroke: "rgba(220,220,220,1)"
                     };
-                var data_chart_peso_peixes = {data:[data.response.chart.data.medias.media_peso_peixes,data.response.chart.data.visita.peso_peixes]};
-                var data_chart_largura_peixes = {data:[data.response.chart.data.medias.media_largura_peixes,data.response.chart.data.visita.largura_peixes]};
-                var data_chart_temperatura_agua = {data:[data.response.chart.data.medias.media_temperatura_agua,data.response.chart.data.visita.temperatura_agua]};
-                var data_chart_oxigenio_agua = {data:[data.response.chart.data.medias.media_oxigenacao_agua,data.response.chart.data.visita.oxigenio_agua]};
-                var data_chart_ionizacao_agua = {data:[data.response.chart.data.medias.media_ionizacao_agua,data.response.chart.data.visita.ionizacao_agua]};
+                var data_chart_peso_peixes = {data:[data.response.chart.data.visita.peso_peixes,data.response.chart.data.medias.media_peso_peixes]};
+                var data_chart_largura_peixes = {data:[data.response.chart.data.visita.largura_peixes,data.response.chart.data.medias.media_largura_peixes]};
+                var data_chart_temperatura_agua = {data:[data.response.chart.data.visita.temperatura_agua,data.response.chart.data.medias.media_temperatura_agua]};
+                var data_chart_oxigenio_agua = {data:[data.response.chart.data.visita.oxigenio_agua,data.response.chart.data.medias.media_oxigenacao_agua]};
+                var data_chart_ionizacao_agua = {data:[data.response.chart.data.visita.ionizacao_agua,data.response.chart.data.medias.media_ionizacao_agua]};
 
                 $.extend(datasets,data_chart_peso_peixes);
                 var ctx = document.getElementById('chartPesoPeixes').getContext('2d');
@@ -179,7 +176,7 @@
                 chart = new Chart(ctx).Bar(chartData,[]);
             },
             error: function(e){
-                console.log("Error: "+e.message);
+                console.log("Error: "+e);
             }
         });
     });

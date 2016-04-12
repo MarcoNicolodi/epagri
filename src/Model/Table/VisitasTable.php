@@ -62,7 +62,7 @@ class VisitasTable extends Table
 
         $validator
             ->add('data','valid',['rule' => 'date'])
-            ->requirePresense('data')
+            ->requirePresence('data')
             ->notEmpty('data');
 
         return $validator;
@@ -77,7 +77,7 @@ class VisitasTable extends Table
     public function getOwner($id)
     {
         $q = $this->find('all')->where(['Visitas.id' => $id])->contain(['Ciclos' => ['Tanques' => ['Propriedades' => ['Usuarios']]]])->first();
-        return $q->ciclo->tanque->propriedade->usuario->id_usuario;
+        return $q ? $q->ciclo->tanque->propriedade->usuario->id_usuario : false;
     }
 
     public function getMediaPesoPeixes($ciclo_id)

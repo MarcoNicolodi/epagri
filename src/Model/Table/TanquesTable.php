@@ -61,6 +61,6 @@ class TanquesTable extends Table
     public function getOwner($id)
     {
         $q = $this->find('all')->where(['Tanques.id' => $id])->contain(['Propriedades' => ['Usuarios']])->first();
-        return $q->propriedade->usuario->id_usuario;
+        return $q ? $q->propriedade->usuario->id_usuario : false;
     }
 }

@@ -121,7 +121,7 @@ class CiclosTable extends Table
     public function getOwner($id)
     {
         $q = $this->find('all')->where(['Ciclos.id' => $id])->contain(['Tanques' => ['Propriedades' => ['Usuarios']]])->first();
-        return $q->tanque->propriedade->usuario->id_usuario;
+        return $q ? $q->tanque->propriedade->usuario->id_usuario : false;
     }
 
     public function getMediaPesoPeixes($id)

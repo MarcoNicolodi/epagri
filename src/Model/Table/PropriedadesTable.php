@@ -61,6 +61,6 @@ class PropriedadesTable extends Table
     public function getOwner($id)
     {
         $q = $this->find('all')->where(['Propriedades.id' => $id])->contain('Usuarios')->first();
-        return $q->usuario->id_usuario;
+        return $q ? $q->usuario->id_usuario : false;
     }
 }

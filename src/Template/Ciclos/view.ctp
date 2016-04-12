@@ -82,3 +82,26 @@
         </div>
     </div>
 </div>
+<?php $this->start('script'); ?>
+<?= $this->fetch('script'); ?>
+<script type="text/javascript">
+    $.getJSON(window.location.origin+'/ciclos/mountVisitasChart/<?=$ciclo->id?>',function(res){
+        console.log(res.data);
+        oxigenio_agua_array = [];
+        temperatura_agua_array = [];
+        ionizacao_agua_array = [];
+        peso_peixes_array = [];
+        largura_peixes_array = [];
+        data_array = [];
+        $.each(res.data,function(k,v){
+            oxigenio_agua_array.push(v.oxigenio_agua);
+            temperatura_agua_array.push(v.temperatura_agua);
+            ionizacao_agua_array.push(v.ionizacao_agua);
+            peso_peixes_array.push(v.peso_peixes);
+            largura_peixes_array.push(v.largura_peixes);
+            data_array.push(v.data);
+        });
+        console.log(data_array);
+    });
+</script>
+<?php $this->end(); ?>

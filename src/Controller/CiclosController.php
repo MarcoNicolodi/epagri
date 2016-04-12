@@ -14,6 +14,9 @@ class CiclosController extends AppController
             return true;
         }
 
+        if($this->request->action == 'getAtivosByTanque')
+            return $this->Ciclos->Tanques->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario');
+
         if($this->Ciclos->getOwner($this->request->params['pass'][0]) == $this->Auth->user('id_usuario'))
             return true;
 
@@ -23,9 +26,13 @@ class CiclosController extends AppController
     //método sem view para usar com ajax
     public function getAtivosByTanque($tanque_id)
     {
-        $ciclos = $this->Ciclos->find()->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
-        $this->set('ciclos',$ciclos);
-        $this->set('_serialize',['ciclos']);
+        if(!$this->request->is('ajax')){
+            $ciclos = $this->Ciclos->find()->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
+            $this->set('ciclos',$ciclos);
+            $this->set('_serialize',['ciclos']);
+        } else {
+            $this->set('error','Method not accepted');
+        }
     }
 
     public function index()
@@ -118,5 +125,17 @@ class CiclosController extends AppController
             $this->Flash->error(__('Ocorreu um problema ao tentar excluir o Ciclo. Por favor, tente novamente.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function mountVisitasChart($ciclo_id)
+    {
+        $data = $this->Ciclos->Visitas->find('all',
+            ['fields' => ['oxigenio_agua','ionizacao_agua','temperatura_agua','largura_peixes','peso_peixes','data'],
+            'conditions' => ['ciclo_id' => $ciclo_id]
+        ]);
+
+        $this->set('data',$data);
+        $this->set('_serialize',['data']);
+
     }
 }

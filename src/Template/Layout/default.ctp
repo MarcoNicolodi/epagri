@@ -33,7 +33,6 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     <?= $this->Html->css('jquery-ui.theme.min.css') ?>
 
     <?= $this->Html->css('font-awesome/css/font-awesome.min.css') ?>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
     <?= $this->Html->css('custom.css') ?>
 
     <?= $this->fetch('meta') ?>
@@ -181,6 +180,7 @@ $cakeDescription = 'EPAGRI Propaga Jundiá';
     <?= $this->Html->script('metisMenu.js') ?>
     <?= $this->Html->script('custom.js') ?>
     <?= $this->Html->script('../bower_components/Chart.js/Chart.js') ?>
+    <?= $this->Html->script('../bower_components/highcharts/highcharts.js') ?>
     <?= $this->fetch('script') ?>
 
 
