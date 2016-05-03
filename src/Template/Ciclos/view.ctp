@@ -82,17 +82,24 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <canvas id="oxigenio_agua_chart" width="800" height="200">
+
+        </canvas>
+    </div>
+</div>
 <?php $this->start('script'); ?>
 <?= $this->fetch('script'); ?>
 <script type="text/javascript">
     $.getJSON(window.location.origin+'/ciclos/mountVisitasChart/<?=$ciclo->id?>',function(res){
         console.log(res.data);
-        oxigenio_agua_array = [];
-        temperatura_agua_array = [];
-        ionizacao_agua_array = [];
-        peso_peixes_array = [];
-        largura_peixes_array = [];
-        data_array = [];
+        var oxigenio_agua_array = [];
+        var temperatura_agua_array = [];
+        var ionizacao_agua_array = [];
+        var peso_peixes_array = [];
+        var largura_peixes_array = [];
+        var data_array = [];
         $.each(res.data,function(k,v){
             oxigenio_agua_array.push(v.oxigenio_agua);
             temperatura_agua_array.push(v.temperatura_agua);
@@ -102,6 +109,28 @@
             data_array.push(v.data);
         });
         console.log(data_array);
+
+        buildChart('oxigenio_agua_chart',data_array,oxigenio_agua_array);
     });
+
+    function buildChart(elt, labels, data){
+        var data = {
+            labels: labels,
+            datasets : [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(224,150,128,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: data
+                }
+            ]
+        }
+        var ctx = document.getElementById(elt).getContext('2d');
+        var chart = new Chart(ctx).Line(data,{});
+    }
 </script>
 <?php $this->end(); ?>

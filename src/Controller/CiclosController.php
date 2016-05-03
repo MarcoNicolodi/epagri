@@ -26,6 +26,7 @@ class CiclosController extends AppController
     //método sem view para usar com ajax
     public function getAtivosByTanque($tanque_id)
     {
+        $this->layout = 'ajax';
         if(!$this->request->is('ajax')){
             $ciclos = $this->Ciclos->find()->where(['tanque_id' => $tanque_id, 'status_id' => 1]);
             $this->set('ciclos',$ciclos);
@@ -129,6 +130,7 @@ class CiclosController extends AppController
 
     public function mountVisitasChart($ciclo_id)
     {
+        $this->viewBuilder()->layout('ajax');
         $data = $this->Ciclos->Visitas->find('all',
             ['fields' => ['oxigenio_agua','ionizacao_agua','temperatura_agua','largura_peixes','peso_peixes','data'],
             'conditions' => ['ciclo_id' => $ciclo_id]

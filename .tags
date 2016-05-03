@@ -1,0 +1,25 @@
+CiclosController	/var/www/html/epagri/src/Controller/CiclosController.php	/^class CiclosController extends AppController$/;"	class	line:6
+isAuthorized	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function isAuthorized($user = null)$/;"	function	line:9
+getAtivosByTanque	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function getAtivosByTanque($tanque_id)$/;"	function	line:27
+layout	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $this->layout = 'ajax';$/;"	variable	line:29
+ciclos	/var/www/html/epagri/src/Controller/CiclosController.php	/^            $ciclos = $this->Ciclos->find()->where(['tanque_id' => $tanque_id, 'status_id' => 1]);$/;"	variable	line:31
+index	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function index()$/;"	function	line:39
+paginate	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $this->paginate = [$/;"	variable	line:41
+view	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function view($id = null)$/;"	function	line:54
+ciclo	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $ciclo = $this->Ciclos->get($id, [$/;"	variable	line:56
+medias	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $medias = $this->Ciclos->Visitas->getAllMedias($id);$/;"	variable	line:60
+add	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function add()$/;"	function	line:65
+ciclo	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $ciclo = $this->Ciclos->newEntity();$/;"	variable	line:67
+ciclo	/var/www/html/epagri/src/Controller/CiclosController.php	/^            $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);$/;"	variable	line:69
+propriedades	/var/www/html/epagri/src/Controller/CiclosController.php	/^            $propriedades = $this->Ciclos->Tanques->Propriedades->find('list')->where(['usuario_id' => $this->Auth->user('id_usuario')])$/;"	variable	line:79
+propriedades	/var/www/html/epagri/src/Controller/CiclosController.php	/^            $propriedades = $this->Ciclos->Tanques->Propriedades->find('list');$/;"	variable	line:84
+status	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $status = $this->Ciclos->Status->find('list',['order' => 'nome']);$/;"	variable	line:89
+edit	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function edit($id = null)$/;"	function	line:94
+ciclo	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $ciclo = $this->Ciclos->get($id, [$/;"	variable	line:97
+ciclo	/var/www/html/epagri/src/Controller/CiclosController.php	/^            $ciclo = $this->Ciclos->patchEntity($ciclo, $this->request->data);$/;"	variable	line:102
+tanques	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $tanques = $this->Ciclos->Tanques->find('list');$/;"	variable	line:113
+status	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $status = $this->Ciclos->Status->find('list');$/;"	variable	line:114
+delete	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function delete($id = null)$/;"	function	line:119
+ciclo	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $ciclo = $this->Ciclos->get($id);$/;"	variable	line:122
+mountVisitasChart	/var/www/html/epagri/src/Controller/CiclosController.php	/^    public function mountVisitasChart($ciclo_id)$/;"	function	line:131
+data	/var/www/html/epagri/src/Controller/CiclosController.php	/^        $data = $this->Ciclos->Visitas->find('all',$/;"	variable	line:134

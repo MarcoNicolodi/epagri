@@ -6,6 +6,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use Cake\Model\Table\ArrayObject;
 
 class VisitasTable extends Table
 {
@@ -57,8 +59,8 @@ class VisitasTable extends Table
 
         $validator
             ->add('ciclo_id','valid',['rule' => 'numeric'])
-            ->requirePresence('ciclo_id')
-            ->notEmpty('ciclo_id');
+            ->requirePresence('ciclo_id','create')
+            ->notEmpty('ciclo_id','create');
 
         $validator
             ->add('data','valid',['rule' => 'date'])
@@ -73,6 +75,15 @@ class VisitasTable extends Table
         $rules->add($rules->existsIn(['ciclo_id'], 'Ciclos'));
         return $rules;
     }
+
+    //converte datas do php para o sql
+    public function beforeMarshal(Event $event, \ArrayObject $data, \ArrayObject $options)
+    {
+        if(array_key_exists('data', $data))
+            $data['data'] = ($data['data']) ? date("Y-m-d", strtotime(implode('-',array_reverse(explode('/',$data['data']))))) : '';
+
+    }
+
 
     public function getOwner($id)
     {
