@@ -84,9 +84,16 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <canvas id="oxigenio_agua_chart" width="800" height="200">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h3 class="panel-title">Oxigenação da Água</h3>
+            </div>
+            <div class="panel panel-body">
+                <canvas id="oxigenio_agua_chart" width="800" height="200">
 
-        </canvas>
+                </canvas>
+            </div>
+        </div>
     </div>
 </div>
 <?php $this->start('script'); ?>
@@ -118,13 +125,13 @@
             labels: labels,
             datasets : [
                 {
-                    label: "My First dataset",
-                    fillColor: "rgba(224,150,128,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    label: elt,
+                    fillColor: "#2ecc71",
+                    strokeColor: "#27ae60",
+                    pointColor: "#2ecc71",
+                    pointStrokeColor: "#27ae60",
+                    pointHighlightFill: "#27ae60",
+                    pointHighlightStroke: "#2ecc71",
                     data: data
                 }
             ]

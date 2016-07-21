@@ -42,14 +42,14 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
-    
+
 
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Propriedades', 'action' => 'index']);
+    $routes->connect('/', ['controller' => 'Usuarios', 'action' => 'login']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

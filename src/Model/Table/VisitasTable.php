@@ -39,23 +39,28 @@ class VisitasTable extends Table
 
         $validator
             ->add('oxigenio_agua', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('oxigenio_agua');
+            ->notEmpty('oxigenio_agua')
+            ->requirePresence('oxigenio_agua');
 
         $validator
             ->add('ionizacao_agua', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('ionizacao_agua');
+            ->notEmpty('ionizacao_agua')
+            ->requirePresence('ionizacao_agua');
 
         $validator
             ->add('temperatura_agua', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('temperatura_agua');
+            ->notEmpty('temperatura_agua')
+            ->requirePresence('temperatura_agua');
 
         $validator
             ->add('largura_peixes', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('largura_peixes');
+            ->notEmpty('largura_peixes')
+            ->requirePresence('largura_peixes');
 
         $validator
             ->add('peso_peixes', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('peso_peixes');
+            ->notEmpty('peso_peixes')
+            ->requirePresence('peso_peixes');
 
         $validator
             ->add('ciclo_id','valid',['rule' => 'numeric'])
